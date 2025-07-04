@@ -1,0 +1,79 @@
+@import '../_variables.css';
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: var(--inactive-text-color);
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.customCheckbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--inactive-text-color);
+  border-radius: 3px;
+  background-color: transparent;
+
+  transition: background-color 0.15s ease-in-out, border-color 0.3s ease-in-out;
+  margin-right: 4px;
+  box-sizing: border-box;
+}
+
+.checkboxLabel:hover .customCheckbox {
+  border-color: var(--hover-text-color-hover);
+}
+
+.checkboxLabel:hover .labelText {
+  color: var(--hover-text-color-hover);
+}
+
+.checkbox:checked + .customCheckbox {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+
+.checkbox:not(:checked) + .customCheckbox {
+  transition: background-color 0.15s ease-in-out 0.3s, border-color 0.15s ease-in-out 0.3s;
+}
+
+.checkmarkIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.checkmarkPath {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  transition: stroke-dashoffset 0.2s ease-out 0.15s;
+}
+
+.checkbox:checked + .customCheckbox .checkmarkPath {
+  stroke-dashoffset: 0;
+}
+
+
+.labelText {
+  color: var(--inactive-text-color);
+  transition: color 0.4s ease-in-out;
+}
+
+.checkbox:checked ~ .labelText {
+  color: var(--active-text-color);
+}

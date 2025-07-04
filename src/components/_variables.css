@@ -1,0 +1,10 @@
+:root {
+    --accent-color: #14B8A6;
+    --accent-color-hover: #10A090;
+    --accent-color-active: #0C887A;
+    --active-text-color: #1F2937;
+    --hover-text-color-hover: #454d5b;
+    --inactive-text-color: #6B7280;
+    --interactive-interface-background-color: #FFFFFF;
+    --non-interactive-interface-background-color: #F8F6F1;
+}

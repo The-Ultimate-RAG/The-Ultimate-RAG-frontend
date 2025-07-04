@@ -1,0 +1,47 @@
+.counterContainer {
+    text-align: center;
+    font-family: Inter, sans-serif;
+    align-items: center;
+    justify-content: center;
+    border: #111827 1px solid;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    width: 500px;
+    height: 500px;
+}
+
+.countDisplay {
+    font-size: 3em;
+    margin-top: 1em;
+    margin-bottom: 24px;
+    color: #1F2937;
+}
+
+.counterButton {
+    width: 150px;
+    height: 50px;
+    font-size: 1em;
+    background-color: #14B8A6;
+    color: #FFFFFF;
+    margin: 0 5px;
+    font-family: Inter, sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, stroke 0.2s ease-in-out;
+}
+
+.counterButton:hover {
+    background-color: #6EE7B7;
+}
+
+.counterButton:active {
+    transform: scale(0.98);
+}
+
+.counterButton:focus {
+    outline: 1px solid #111827;
+}

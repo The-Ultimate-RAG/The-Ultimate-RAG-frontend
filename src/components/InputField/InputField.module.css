@@ -1,0 +1,114 @@
+@import '../_variables.css';
+
+:root {
+    --custom-bezier: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.inputContainer {
+    position: relative;
+    margin: 0 auto;
+    font-family: Inter, sans-serif;
+    color: var(--inactive-text-color);
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+}
+
+.inputField {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    border: none;
+    outline: none;
+    border-bottom: var(--inactive-text-color) 1px solid;
+    transition: border-color ease-in-out 0.3s, box-shadow ease-in-out 0.15s, border-bottom ease-in-out 0.2s;
+    box-sizing: border-box;
+
+    /* Remove default eye icon */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+}
+
+.inputField:focus {
+    border-bottom: var(--active-text-color) 1.5px solid;
+    transition: border-bottom 0.2s var(--custom-bezier);
+}
+
+.inputLabel {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    pointer-events: none;
+    transition: transform-origin 0.3s var(--custom-bezier), transform 0.3s var(--custom-bezier), color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.inputLabelFloating {
+    transform: translate(-4px, -31px) scale(0.9);
+    color: var(--active-text-color);
+    text-shadow: 0.5px 0 0;
+    transform-origin: top left;
+}
+
+.inputFieldIcon {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: var(--inactive-text-color);
+    background-color: var(--interactive-interface-background-color);
+    transition: transform 0.3s var(--custom-bezier), color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.inputField:hover {
+    border-bottom-color: var(--active-text-color);
+}
+
+
+.eyeIconWrapper {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.eyeIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: transform 0.3s var(--custom-bezier), opacity 0.3s ease-in-out;
+    backface-visibility: hidden;
+}
+
+.eyeIcon.visible {
+    opacity: 1;
+    transform: rotateX(0deg);
+}
+
+.eyeIcon.visible:hover {
+    transform: scale(1.06);
+}
+
+.openEyeIcon {
+    transform: rotateX(90deg);
+}
+
+.closedEyeIcon {
+    transform: rotateX(-90deg);
+}
+
+.inputFieldIconFloating {
+    transform: translateY(-4px);
+    color: var(--active-text-color);
+    text-shadow: 0.5px 0 0;
+}
