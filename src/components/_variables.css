@@ -7,4 +7,23 @@
     --inactive-text-color: #6B7280;
     --interactive-interface-background-color: #FFFFFF;
     --non-interactive-interface-background-color: #F8F6F1;
+    --default-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+    --input-background-color: #E0E0E0;
+    --input-focused-background-color: var(--interactive-interface-background-color);
+    --input-border-radius: 10px;
+    --input-padding: 16px 24px;
+    --input-placeholder-color: #999999;
+    --input-focused-shadow: 0 0 0 3px rgba(20, 184, 166, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    --button-transition-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    --active-button-box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.4), 0 8px 20px rgba(0, 0, 0, 0.15)
+}
+
+.light {
+    --var1: #111111;
+}
+
+.dark {
+    --var1: #000000;
+
 }

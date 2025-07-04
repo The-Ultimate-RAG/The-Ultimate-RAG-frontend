@@ -14,11 +14,11 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--default-box-shadow);
     transform: translateY(0);
-    transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: background-color 0.3s var(--button-transition-function),
+    transform 0.3s var(--button-transition-function),
+    box-shadow 0.3s var(--button-transition-function);
 }
 
 .button::before {
@@ -30,7 +30,7 @@
     height: 100%;
     background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.08) 20%, rgba(255, 255, 255, 0.08) 30%, transparent 70%, transparent 100%);
     z-index: -1;
-    transition: left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: left 0.5s var(--button-transition-function);
 }
 
 

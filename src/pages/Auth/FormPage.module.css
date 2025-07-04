@@ -9,9 +9,16 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--default-box-shadow)
 }
 
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+}
 
 .componentRow {
     display: flex;

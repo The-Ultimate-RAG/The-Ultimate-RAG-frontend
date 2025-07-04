@@ -1,0 +1,21 @@
+@import "../_variables.css";
+
+.messageBox {
+    padding: 8px 24px;
+    border-radius: 16px;
+    width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+    margin: 16px;
+}
+
+.userMessageBox {
+    background-color: var(--accent-color);
+    color: var(--interactive-interface-background-color);
+    max-width: 400px;
+}
+
+.systemMessageBox {
+    color: var(--active-text-color);
+    background-color: var(--interactive-interface-background-color);
+    max-width: 800px;
+}

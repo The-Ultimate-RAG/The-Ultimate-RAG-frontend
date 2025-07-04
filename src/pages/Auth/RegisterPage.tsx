@@ -1,9 +1,9 @@
-import Text from "../Text/Text";
+import Text from "../../components/Text/Text";
 import styles from "./FormPage.module.css";
-import Button from "../Button/Button";
-import PasswordInputField from "../InputField/PasswordInputField";
-import EmailInputField from "../InputField/EmailInputField";
-import Checkbox from "../Checkbox/Checkbox";
+import Button from "../../components/Button/Button";
+import PasswordInputField from "../../components/InputField/PasswordInputField";
+import EmailInputField from "../../components/InputField/EmailInputField";
+import Checkbox from "../../components/Checkbox/Checkbox";
 import React, { useEffect } from "react";
 
 function RegisterPage() {

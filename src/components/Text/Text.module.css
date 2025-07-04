@@ -2,6 +2,10 @@
 
 .text {
     font-family: Inter, sans-serif;
+    white-space: pre-wrap;
+    display: inline-block;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 
