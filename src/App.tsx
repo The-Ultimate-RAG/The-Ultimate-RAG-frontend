@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import LoginPage from "./components/Auth/LoginPage";
 import RegisterPage from "./components/Auth/RegisterPage";
+import SideBar from "./components/SideBar/SideBar";
 
 const NotFoundPage = () => {
   const location = useLocation(); // To show the path not found
@@ -42,6 +43,7 @@ function App() {
         }}
       >
         <Routes>
+          <Route path="/side-bar" element={<SideBar />} />
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
