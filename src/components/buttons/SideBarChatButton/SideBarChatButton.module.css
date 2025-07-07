@@ -1,0 +1,28 @@
+@import "../../_variables.css";
+
+.chatButton {
+    width: 40%;
+    margin: var(--spacing-sm);
+    max-height: 3em;
+    height: 3em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color-chat);
+    background-color: transparent;
+    transition: all var(--transition-speed-default) var(--bezier-custom);
+    box-shadow: var(--shadow-default);
+}
+
+.chatButton:hover {
+    background-color: #374151;
+    border: 1px solid var(--border-color-default);
+    border-color: #374151;
+    transform: translateY(-2px);
+}
+
+.chatButton:active {
+    background-color: var(--color-primary-hover);
+    transform: translateY(0px);
+}
