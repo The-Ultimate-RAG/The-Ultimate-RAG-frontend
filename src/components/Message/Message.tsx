@@ -2,8 +2,9 @@ import Text from "../Text/Text";
 import styles from "./Message.module.css";
 
 interface MessageProps {
+  key: number;
   textContent: string;
-  sender: string;
+  sender: "user" | "system";
 }
 
 function Message(props: Readonly<MessageProps>) {
@@ -13,7 +14,7 @@ function Message(props: Readonly<MessageProps>) {
 
   return (
     <div className={messageStyle}>
-      <Text textContent={textContent} interactable={true} />
+      <Text textContent={textContent} interactable={true} fontSize={"14px"} />
     </div>
   );
 }
