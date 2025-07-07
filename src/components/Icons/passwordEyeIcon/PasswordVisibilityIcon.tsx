@@ -1,8 +1,8 @@
 // PasswordVisibilityIcon.tsx
 import React from "react";
-import { OpenEyeIcon } from "../Icons/OpenEyeIcon";
-import { ClosedEyeIcon } from "../Icons/ClosedEyeIcon";
-import styles from "../InputField/InputField.module.css";
+import { OpenEyeIcon } from "./OpenEyeIcon";
+import { ClosedEyeIcon } from "./ClosedEyeIcon";
+import styles from "../../InputField/Auth/InputField.module.css";
 
 interface PasswordVisibilityIconProps {
   isVisible: boolean;
