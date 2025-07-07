@@ -1,6 +1,6 @@
 .pageContainer {
     padding: 30px;
-    background-color: var(--interactive-interface-background-color);
+    background-color: var(--background-color-primary);
     text-align: center;
     min-width: 400px;
     border-radius: 12px;
@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    box-shadow: var(--default-box-shadow)
+    box-shadow: var(--shadow-default)
 }
 
 .headerContainer {

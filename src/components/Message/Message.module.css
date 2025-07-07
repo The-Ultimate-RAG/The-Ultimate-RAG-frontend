@@ -4,18 +4,29 @@
     padding: 8px 24px;
     border-radius: 16px;
     width: fit-content;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
-    margin: 16px;
+    box-shadow: var(--shadow-default);
+    margin: var(--spacing-huge) var(--spacing-zero)
 }
 
 .userMessageBox {
-    background-color: var(--accent-color);
-    color: var(--interactive-interface-background-color);
-    max-width: 400px;
+    background-color: var(--color-primary);
+    max-width: 50%;
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.userMessageBox p {
+    color: var(--text-color-button);
 }
 
 .systemMessageBox {
-    color: var(--active-text-color);
-    background-color: var(--interactive-interface-background-color);
-    max-width: 800px;
+    color: var(--text-color-button);
+    background-color: var(--background-color-primary);
+    max-width: 100%;
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+.systemMessageBox p {
+    color: var(--text-color-primary)
 }

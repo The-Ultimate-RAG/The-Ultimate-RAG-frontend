@@ -11,7 +11,7 @@
   align-items: center;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
-  color: var(--inactive-text-color);
+  color: var(--text-color-secondary);
 }
 
 .checkbox {
@@ -26,7 +26,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--inactive-text-color);
+  border: 2px solid var(--border-color-default);
   border-radius: 3px;
   background-color: transparent;
 
@@ -36,16 +36,16 @@
 }
 
 .checkboxLabel:hover .customCheckbox {
-  border-color: var(--hover-text-color-hover);
+  border-color: var(--text-color-hover);
 }
 
 .checkboxLabel:hover .labelText {
-  color: var(--hover-text-color-hover);
+  color: var(--text-color-hover);
 }
 
 .checkbox:checked + .customCheckbox {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 
@@ -70,10 +70,10 @@
 
 
 .labelText {
-  color: var(--inactive-text-color);
+  color: var(--text-color-secondary);
   transition: color 0.4s ease-in-out;
 }
 
 .checkbox:checked ~ .labelText {
-  color: var(--active-text-color);
+  color: var(--text-color-primary);
 }
