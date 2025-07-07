@@ -1,0 +1,48 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.chatContainer {
+    max-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-y: scroll;
+}
+.chatContainer::-webkit-scrollbar-track {
+    display: none;
+    width: 0;
+}
+
+.chatContainer::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+}
+
+.messageDisplay {
+    box-sizing: border-box;
+    margin-bottom: 6em;
+}
+
+
+.inputArea {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    width: 80%;
+    max-width: 1000px;
+}
+
