@@ -8,9 +8,24 @@
     overflow-wrap: anywhere;
 }
 
+.colorPrimary {
+    color: var(--text-color-primary)
+}
+
+.colorSecondary {
+    color: var(--text-color-secondary)
+}
+
+.colorButton {
+    color: var(--text-color-button)
+}
+
+.colorHover {
+    color: var(--text-color-hover)
+}
 
 .text a {
-    color: var(--accent-color);
+    color: var(--color-primary);
     text-decoration: none;
     position: relative;
     display: inline-block;
@@ -24,7 +39,7 @@
     left: 0;
     height: 1px;
     bottom: -1px;
-    background-color: var(--accent-color);
+    background-color: var(--color-primary);
 
     transform: scaleX(0);
     transform-origin: left;
@@ -32,14 +47,14 @@
 }
 
 .text a:hover {
-    color: var(--accent-color-hover);
+    color: var(--color-primary-hover);
     transform: translateY(-1px);
     text-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .text a:hover::after {
     transform: scaleX(1);
-    color: var(--accent-color-hover);
+    color: var(--color-primary-hover);
 }
 
 .text a:not(:hover)::after {
@@ -47,10 +62,10 @@
 }
 
 .text a:active {
-    color: var(--accent-color-active);
+    color: var(--color-primary-active);
     transform: translateY(0px) scale(0.98);
 }
 
 .text a:active::after {
-    color: var(--accent-color-active);
+    color: var(--color-primary-active);
 }
