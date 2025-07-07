@@ -43,7 +43,7 @@ function Checkbox(props: Readonly<CheckboxProps>) {
             <path
               className={styles.checkmarkPath}
               fill="none"
-              stroke="var(--interactive-interface-background-color)"
+              stroke="var(--text-color-button)"
               strokeWidth="3"
               d="M4 12.6111L8.92308 17.5L20 6.5"
             />

@@ -1,8 +1,7 @@
 @import "./components/_variables.css";
 
 body {
-    background: var(--non-interactive-interface-background-color);
-    overflow: hidden;
+    background: var(--background-surface-secondary);
 
     display: flex;
     justify-content: center;
