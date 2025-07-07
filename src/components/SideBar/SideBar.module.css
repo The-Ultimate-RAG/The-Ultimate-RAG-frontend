@@ -1,1 +1,17 @@
-import React from "react"
+/* src/components/SideBar/SideBar.module.css */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative; /* Важно: для абсолютного позиционирования SearchButton */
+  /* Опционально: добавьте padding, если expanded кнопка выходит за границы */
+  padding: 10px;
+}
+
+.hide-neighbor {
+  opacity: 0;
+  pointer-events: none; /* Отключает взаимодействие с кнопкой */
+  transform: translateX(-100px); /* Сдвигает кнопку влево */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Плавная анимация скрытия/сдвига */
+}

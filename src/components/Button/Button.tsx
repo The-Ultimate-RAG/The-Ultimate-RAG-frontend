@@ -5,6 +5,7 @@ import React from "react";
 interface ButtonProps {
   text: string;
   width?: string;
+  heigth?: string;
   fontSize?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonRef?: React.Ref<HTMLButtonElement>;
@@ -14,6 +15,7 @@ function Button(props: Readonly<ButtonProps>) {
   const {
     text,
     width = "100px",
+    heigth,
     fontSize = "2rem",
     buttonRef,
     onClick,
@@ -21,6 +23,7 @@ function Button(props: Readonly<ButtonProps>) {
 
   const inlineStyles: React.CSSProperties = {
     width: width,
+    height: heigth,
   };
 
   return (

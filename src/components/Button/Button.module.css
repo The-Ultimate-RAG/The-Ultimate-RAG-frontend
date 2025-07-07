@@ -7,10 +7,12 @@
     font-weight: 600;
     border-radius: 10px;
     border: none;
-    text-align: center;
+
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     z-index: 1;
