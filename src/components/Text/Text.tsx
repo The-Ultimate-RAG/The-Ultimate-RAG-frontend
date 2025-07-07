@@ -5,7 +5,7 @@ interface TextProps {
   textContent: React.ReactNode;
   fontWeight?: string | number;
   fontSize?: string | number;
-  color?: string;
+  colorVariant?: "default" | "primary" | "secondary" | "button" | "hover";
   interactable?: boolean;
 }
 
@@ -14,12 +14,19 @@ function Text(props: Readonly<TextProps>) {
     textContent,
     fontSize = "16px",
     fontWeight = "normal",
-    color,
+    colorVariant = "default",
     interactable = false,
   } = props;
 
+  const colorClass = {
+    default: "",
+    primary: styles.colorPrimary,
+    secondary: styles.colorSecondary,
+    button: styles.colorButton,
+    hover: styles.colorHover,
+  }[colorVariant];
+
   const inlineStyles: React.CSSProperties = {
-    color: color,
     fontSize: fontSize,
     fontWeight: fontWeight,
     userSelect: interactable ? "auto" : "none",
@@ -28,7 +35,7 @@ function Text(props: Readonly<TextProps>) {
   };
 
   return (
-    <p className={styles.text} style={inlineStyles}>
+    <p className={`${styles.text} ${colorClass}`} style={inlineStyles}>
       {textContent}
     </p>
   );
