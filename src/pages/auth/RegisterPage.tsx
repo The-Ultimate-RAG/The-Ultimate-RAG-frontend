@@ -1,8 +1,8 @@
 import Text from "../../components/Text/Text";
 import styles from "./FormPage.module.css";
-import Button from "../../components/Button/Button";
-import PasswordInputField from "../../components/InputField/PasswordInputField";
-import EmailInputField from "../../components/InputField/EmailInputField";
+import Button from "../../components/buttons/MainButton/Button";
+import PasswordInputField from "../../components/InputField/Auth/PasswordInputField";
+import EmailInputField from "../../components/InputField/Auth/EmailInputField";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import React, { useEffect } from "react";
 
