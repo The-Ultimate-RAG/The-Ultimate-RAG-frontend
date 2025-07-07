@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BaseInputField from "./BaseInputField";
-import { EmailIcon } from "../Icons/EmailIcon";
+import { EmailIcon } from "../../Icons/EmailIcon";
 
 interface EmailInputFieldProps {
   label: string;

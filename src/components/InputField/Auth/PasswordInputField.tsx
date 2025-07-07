@@ -1,7 +1,7 @@
 // PasswordInputField.tsx
 import React, { useState, useImperativeHandle } from "react";
 import BaseInputField from "./BaseInputField";
-import PasswordVisibilityIcon from "../Icons/PasswordVisibilityIcon";
+import PasswordVisibilityIcon from "../../Icons/passwordEyeIcon/PasswordVisibilityIcon";
 
 interface PasswordInputFieldProps {
   label: string;
