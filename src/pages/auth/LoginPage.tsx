@@ -1,8 +1,8 @@
 import Text from "../../components/Text/Text";
 import styles from "./FormPage.module.css";
-import Button from "../../components/Button/Button";
-import PasswordInputField from "../../components/InputField/PasswordInputField";
-import EmailInputField from "../../components/InputField/EmailInputField";
+import Button from "../../components/buttons/MainButton/Button";
+import PasswordInputField from "../../components/InputField/Auth/PasswordInputField";
+import EmailInputField from "../../components/InputField/Auth/EmailInputField";
 import Checkbox from "../../components/Checkbox/Checkbox";
 import React, { useEffect } from "react";
 
@@ -45,9 +45,13 @@ function LoginPage() {
 
   return (
     <div className={styles.pageContainer}>
-      {/*<Logo width={logoSize} height={logoSize} />*/}
       <div className={styles.headerContainer}>
-        <Text textContent={"Log In"} fontWeight={700} fontSize={32} />
+        <Text
+          textContent={"Log In"}
+          fontWeight={700}
+          fontSize={32}
+          colorVariant={"primary"}
+        />
       </div>
       <EmailInputField
         label={"Email"}
@@ -84,6 +88,7 @@ function LoginPage() {
           }
           fontSize={"13px"}
           interactable={true}
+          colorVariant={"primary"}
         />
       </div>
     </div>
