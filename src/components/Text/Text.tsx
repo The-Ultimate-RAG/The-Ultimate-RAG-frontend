@@ -4,7 +4,7 @@ import React from "react";
 interface TextProps {
   textContent: React.ReactNode;
   fontWeight?: string | number;
-  fontSize?: string | number;
+  fontSize?: "small" | "medium" | "large" | "huge";
   colorVariant?: "default" | "primary" | "secondary" | "button" | "hover";
   interactable?: boolean;
 }
@@ -12,11 +12,18 @@ interface TextProps {
 function Text(props: Readonly<TextProps>) {
   const {
     textContent,
-    fontSize = "16px",
+    fontSize = "medium",
     fontWeight = "normal",
     colorVariant = "default",
     interactable = false,
   } = props;
+
+  const fontSizeClass = {
+    small: styles.fontSizeSmall,
+    medium: styles.fontSizeMedium,
+    large: styles.fontSizeLarge,
+    huge: styles.fontSizeHuge,
+  }[fontSize];
 
   const colorClass = {
     default: "",
@@ -27,7 +34,6 @@ function Text(props: Readonly<TextProps>) {
   }[colorVariant];
 
   const inlineStyles: React.CSSProperties = {
-    fontSize: fontSize,
     fontWeight: fontWeight,
     userSelect: interactable ? "auto" : "none",
     WebkitUserSelect: interactable ? "auto" : "none",
@@ -35,7 +41,10 @@ function Text(props: Readonly<TextProps>) {
   };
 
   return (
-    <p className={`${styles.text} ${colorClass}`} style={inlineStyles}>
+    <p
+      className={`${styles.text} ${colorClass} ${fontSizeClass}`}
+      style={inlineStyles}
+    >
       {textContent}
     </p>
   );

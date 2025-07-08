@@ -82,9 +82,13 @@ function RegisterPage() {
 
   return (
     <div className={styles.pageContainer}>
-      {/*<Logo width={logoSize} height={logoSize} />*/}
       <div className={styles.headerContainer}>
-        <Text textContent={"Sign up"} fontWeight={700} fontSize={32} />
+        <Text
+          textContent={"Sign up"}
+          fontWeight={700}
+          fontSize={"huge"}
+          colorVariant={"primary"}
+        />
       </div>
       <EmailInputField
         label={"Email"}
@@ -119,7 +123,7 @@ function RegisterPage() {
         <Button
           text={"Register"}
           width={width}
-          fontSize={"20px"}
+          fontSize={"large"}
           buttonRef={loginButtonRef}
           onClick={handleLoginClick}
         />
@@ -129,8 +133,9 @@ function RegisterPage() {
               {"Already have an account?"} <a href="/login">Log in</a>
             </>
           }
-          fontSize={"13px"}
+          fontSize={"small"}
           interactable={true}
+          colorVariant={"primary"}
         />
       </div>
     </div>

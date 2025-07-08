@@ -49,7 +49,7 @@ function LoginPage() {
         <Text
           textContent={"Log In"}
           fontWeight={700}
-          fontSize={32}
+          fontSize={"huge"}
           colorVariant={"primary"}
         />
       </div>
@@ -69,14 +69,14 @@ function LoginPage() {
         <Checkbox label={"Remember me"} size={fontSize} />
         <Text
           textContent={<a href={"/"}>Forgot password?</a>}
-          fontSize={fontSize}
+          fontSize={"medium"}
         />
       </div>
       <div className={styles.loginAndRegisterContainer}>
         <Button
           text={"Login"}
           width={width}
-          fontSize={"20px"}
+          fontSize={"large"}
           buttonRef={loginButtonRef}
           onClick={handleLoginClick}
         />
@@ -86,7 +86,7 @@ function LoginPage() {
               {"Don't have an account?"} <a href="/register">Register</a>
             </>
           }
-          fontSize={"13px"}
+          fontSize={"small"}
           interactable={true}
           colorVariant={"primary"}
         />

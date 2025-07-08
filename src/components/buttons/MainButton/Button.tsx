@@ -5,7 +5,7 @@ import React from "react";
 interface ButtonProps {
   text: string;
   width?: string;
-  fontSize?: string;
+  fontSize?: "small" | "medium" | "large";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonRef?: React.Ref<HTMLButtonElement>;
   height?: string;
@@ -15,7 +15,7 @@ function Button(props: Readonly<ButtonProps>) {
   const {
     text,
     width = "100px",
-    fontSize = "2rem",
+    fontSize = "large",
     buttonRef,
     onClick,
     height,

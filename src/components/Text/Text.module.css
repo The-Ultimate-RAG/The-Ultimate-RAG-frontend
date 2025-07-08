@@ -8,6 +8,22 @@
     overflow-wrap: anywhere;
 }
 
+.fontSizeSmall {
+    font-size: var(--font-size-small);
+}
+
+.fontSizeMedium {
+    font-size: var(--font-size-medium);
+}
+
+.fontSizeLarge {
+    font-size: var(--font-size-large);
+}
+
+.fontSizeHuge {
+    font-size: var(--font-size-huge);
+}
+
 .colorPrimary {
     color: var(--text-color-primary)
 }
