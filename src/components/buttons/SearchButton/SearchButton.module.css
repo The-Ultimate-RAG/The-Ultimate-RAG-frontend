@@ -1,0 +1,174 @@
+/* src/components/SearchButton/SearchButton.module.css */
+
+@import "../../_variables.css";
+
+/* Класс .container теперь является основным для оборачивающего элемента */
+.container {
+  /* ... (все ваши текущие стили для .container) ... */
+  background-color: var(--color-primary);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 50%;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Важно: для нормального позиционирования внутри flex-контейнера */
+  overflow: hidden;
+  z-index: 1; /* Изначально z-index 1 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+
+  /* Анимации для контейнера при расширении/сворачивании и для hover/active */
+  transition:
+    width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-radius 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), /* Анимируем left */
+    top 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), /* Анимируем top */
+    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Для transform: scale/translate */
+}
+
+/* Эффект свечения при наведении (как .button::before) */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.08) 20%, rgba(255, 255, 255, 0.08) 30%, transparent 70%, transparent 100%);
+  z-index: -1;
+  transition: left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Hover эффекты для контейнера, когда он не развернут */
+.container:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.container:hover::before {
+  left: 100%;
+}
+
+/* Active эффекты для контейнера, когда он не развернут */
+.container:active {
+  background-color: var(--accent-color-active);
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition-duration: 0.1s;
+}
+
+/* Focus-visible для доступности */
+.container:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.4), 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Стили для внутренней кнопки (когда контейнер не развернут) */
+.searchButton {
+  background: none;
+  border: none;
+  padding: 0; /* Убираем лишние паддинги, т.к. размер задает контейнер */
+  display: flex; /* Для центрирования SVG */
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Занимает всю ширину контейнера */
+  height: 100%; /* Занимает всю высоту контейнера */
+  cursor: pointer;
+}
+
+/* Стилизация SVG иконки */
+.searchButton .icon {
+  width: 60%; /* SVG будет занимать 60% от ширины контейнера */
+  height: 60%; /* SVG будет занимать 60% от высоты контейнера */
+  fill: var(--text-color-button); /* Цвет иконки */
+  transition: fill 0.3s ease; /* Плавное изменение цвета */
+}
+
+/* Стили для развернутого состояния (поисковая строка) */
+.container.expanded {
+  width: 300px; /* Увеличиваем ширину, чтобы перекрывать */
+  border-radius: 8px; /* Прямоугольная форма */
+  background-color: white; /* Фон поисковой строки */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+  transform: translateY(0); /* Сбрасываем transform для развернутого состояния */
+  padding: 5px; /* Внутренние отступы для формы */
+
+  /* Важно: Позиционирование для перекрытия */
+  position: absolute; /* Теперь кнопка абсолютно позиционирована */
+  top: 50%; /* Смещаем на 50% вниз от родителя */
+  left: 50%; /* Смещаем на 50% вправо от родителя */
+  transform: translate(-50%, -50%); /* Центрируем относительно себя */
+  z-index: 1000; /* Высокий z-index для перекрытия */
+}
+
+/* Скрываем ::before при развернутом состоянии */
+.container.expanded::before {
+  display: none;
+}
+
+/* Скрываем hover-эффекты при развернутом состоянии */
+.container.expanded:hover {
+  background-color: white; /* Не меняем фон при наведении в развернутом состоянии */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Сохраняем тень */
+  
+}
+
+.container.expanded:active {
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container.expanded:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.4), 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.searchInput {
+  flex-grow: 1; /* Поле ввода занимает все доступное пространство */
+  border: none;
+  outline: none; /* Убираем стандартную обводку при фокусе */
+  padding: 8px 0; /* Отступы внутри инпута */
+  font-size: 1rem;
+  background: transparent; /* Прозрачный фон, чтобы контейнер задавал цвет */
+  color: #333; /* Цвет текста в поле ввода */
+  font-family: 'Inter', sans-serif; /* Применяем шрифт и к инпуту */
+}
+
+.searchInput::placeholder {
+  color: #888;
+}
+
+.submitButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px; /* Отступ от инпута */
+}
+
+.submitButton .iconInInput {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color); /* Цвет иконки в инпуте соответствует акцентному */
+}

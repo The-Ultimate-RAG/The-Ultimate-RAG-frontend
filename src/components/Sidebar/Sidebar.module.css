@@ -5,3 +5,26 @@
     align-items: center;
     justify-content: center;
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative; /* Важно: для абсолютного позиционирования SearchButton */
+  /* Опционально: добавьте padding, если expanded кнопка выходит за границы */
+  padding: 10px;
+}
+
+.addChatButton {
+  width: 150%; /* Ширина кнопки "Добавить чат" */
+  height: 60px; /* Высота кнопки "Добавить чат" */
+  margin-bottom: 10px; /* Отступ снизу для разделения с SearchButton */
+}
+
+.hide-neighbor {
+  opacity: 0;
+  pointer-events: none; /* Отключает взаимодействие с кнопкой */
+  transform: translateX(-100px); /* Сдвигает кнопку влево */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Плавная анимация скрытия/сдвига */
+}

@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonRef?: React.Ref<HTMLButtonElement>;
   height?: string;
+  borderRadius?: string;
 }
 
 function Button(props: Readonly<ButtonProps>) {
@@ -19,11 +20,13 @@ function Button(props: Readonly<ButtonProps>) {
     buttonRef,
     onClick,
     height,
+    borderRadius,
   } = props;
 
   const inlineStyles: React.CSSProperties = {
     width: width,
     height: height,
+    borderRadius: borderRadius,
   };
 
   return (
