@@ -12,6 +12,7 @@ import PdfViewerComponent from "./components/Viewer/PdfViewerComponent";
 import Chat from "./components/Chat/Chat";
 import Button from "./components/buttons/MainButton/Button";
 import Sidebar from "./components/Sidebar/Sidebar";
+import FileUpload from "./components/FileUpload/FileUpload";
 
 // Lazy-loaded components
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
@@ -79,6 +80,7 @@ function App() {
         >
           <Routes>
             <Route path={"/chat"} element={<Chat />} />
+            <Route path={"/file-upload"} element={<FileUpload />} />
             <Route path={"sidebar"} element={<Sidebar />} />
             <Route path={"/test"} element={<PdfViewerExample />} />
             <Route path="/" element={<Navigate to="/login" replace />} />
