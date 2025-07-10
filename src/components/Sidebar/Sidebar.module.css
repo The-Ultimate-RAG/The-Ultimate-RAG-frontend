@@ -1,7 +1,7 @@
 @import "../_variables.css";
 
 .sidebarContainer {
-    width: 25%;
+    width: 100%;
     min-width: 250px;
     height: 100vh;
     display: flex;
@@ -9,7 +9,6 @@
     align-items: left;
     justify-content: flex-start;
     background-color: var(--background-color-primary);
-    border: 1px solid black;
 }
 
 .sidebarContainer .buttonContainer {
@@ -23,7 +22,6 @@
   padding: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
-  border: 1px solid black;
 }
 
 .sidebarContainer .buttonContainer .addChatButton {
@@ -49,7 +47,6 @@
   justify-content: flex-start;
   flex-grow: 1;
   overflow-y: auto;
-  border: 1px solid black;
 }
 
 .chatsContainer::-webkit-scrollbar-track {
@@ -74,7 +71,5 @@
 
 .hide-neighbor {
   opacity: 0;
-  pointer-events: none; /* Отключает взаимодействие с кнопкой */
-  transform: translateX(-100px); /* Сдвигает кнопку влево */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Плавная анимация скрытия/сдвига */
+  pointer-events: none;
 }

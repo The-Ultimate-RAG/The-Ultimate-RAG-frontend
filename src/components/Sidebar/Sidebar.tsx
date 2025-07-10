@@ -35,7 +35,7 @@ function Sidebar() {
     <aside className={styles.sidebarContainer}>
       <div className={styles.buttonContainer}>
         <div className={isSearchExpanded ? styles.hideNeighbor : styles.addChatButton}>
-        <Button text={"+ Add chat"} height={baseButtonHeight} width="100%" borderRadius="default" onClick={handleAddChat} />
+        <Button children={"+ Add chat"} height={baseButtonHeight} width="100%" borderRadius="round" onClick={handleAddChat} />
         </div>
         <nav className={styles.searchButton}>
         <SearchButton 

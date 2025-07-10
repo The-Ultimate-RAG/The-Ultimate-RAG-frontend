@@ -18,7 +18,7 @@ function ThemeSwitcher() {
   return (
     <Button
           onClick={toggleTheme}
-          text={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          children={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
           width={"100%"}
           fontSize={"medium"}
         />

@@ -9,7 +9,7 @@ import {
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 import NotFoundPage from "./pages/NotFoundPage";
-import PdfViewerComponent from "./components/Viewer/PdfViewerComponent";
+import PdfViewerComponent from "./components/files/PdfViewer/PdfViewer";
 import Chat from "./components/Chat/Chat";
 import Button from "./components/buttons/MainButton/Button";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -70,16 +70,6 @@ function App() {
           }
         >
           <Routes>
-            <Route
-              path={"/file-card"}
-              element={
-                <UploadedFileCard
-                  fileName={"Some filename"}
-                  fileType={"pdf"}
-                  fileSize={42398443}
-                />
-              }
-            />
             <Route path={"/chat"} element={<Chat />} />
             <Route path={"sidebar"} element={<Sidebar />} />
             <Route path={"/test"} element={<PdfViewerExample />} />

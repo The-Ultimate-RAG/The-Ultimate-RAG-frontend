@@ -21,11 +21,13 @@ function Button(props: Readonly<ButtonProps>) {
     buttonRef,
     onClick,
     height,
+    borderRadius = "default",
   } = props;
 
   const inlineStyles: React.CSSProperties = {
     width: width,
     height: height,
+    borderRadius: borderRadius === "default" ? "10px" : "2em",
   };
 
   return (
