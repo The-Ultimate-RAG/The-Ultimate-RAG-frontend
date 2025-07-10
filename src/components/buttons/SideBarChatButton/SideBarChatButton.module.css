@@ -9,10 +9,9 @@
     display: flex;
     justify-content: center;
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--border-color-chat);
+    border: 1px solid var(--focus-color);
     background-color: transparent;
     transition: all var(--transition-speed-default) var(--bezier-custom);
-    box-shadow: var(--shadow-default);
 }
 
 .chatButton:hover {

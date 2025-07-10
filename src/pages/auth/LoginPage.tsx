@@ -70,7 +70,7 @@ function LoginPage() {
       </div>
       <div className={styles.loginAndRegisterContainer}>
         <Button
-          text={"Login"}
+          children={"Login"}
           width={width}
           fontSize={"large"}
           buttonRef={loginButtonRef}

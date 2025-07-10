@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./FileViewerPopup.module.css";
 import PdfViewer from "../PdfViewer/PdfViewer";
 import Button from "../../buttons/MainButton/Button";
+import Text from "../../Text/Text";
 
 interface FileViewerPopupProps {
   isOpen: boolean;
@@ -25,7 +26,7 @@ const FileViewerPopup = ({
       <div className={styles.backdrop} onClick={onClose} />
       <div className={`${styles.popupContainer} ${isOpen ? styles.open : ""}`}>
         <header className={styles.popupHeader}>
-          <h2 className={styles.fileName}>{fileName}</h2>
+          <Text className={styles.fileName}>{fileName}</Text>
           <Button onClick={onClose} width="80px" height="40px">
             Close
           </Button>

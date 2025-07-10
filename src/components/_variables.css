@@ -96,8 +96,8 @@
 
     --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.2);
     --border-color-default: #A9B0BF;
-    --border-color-chat: #30363D
+    --border-color-chat: #30363D;
 
     /* Chat button */
-    --focus-color: #374151;
+    --focus-color: #30363D;
 }

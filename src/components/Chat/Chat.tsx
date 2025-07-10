@@ -1,11 +1,14 @@
+// Chat.tsx
 import TextInput from "../InputField/Basic/TextInput/TextInput";
 import styles from "./Chat.module.css";
 import React, { useEffect, useRef, useState } from "react";
 import Message from "../Message/Message";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
+import FileViewerPopup from "../files/FileViewerPopup/FileViewerPopup"; // Import FileViewerPopup
 
 interface ChatProps {
   width?: number;
+  openFileViewer: (fileUrl: string, fileName: string) => void;
 }
 
 interface ChatMessage {
@@ -13,11 +16,16 @@ interface ChatMessage {
   sender: "user" | "system";
 }
 
-function Chat() {
+function Chat({ openFileViewer }: Readonly<ChatProps>) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentInput, setCurrentInput] = useState<string>("");
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // State for FileViewerPopup
+  const [isFileViewerOpen, setIsFileViewerOpen] = useState(false);
+  const [viewerFileUrl, setViewerFileUrl] = useState("");
+  const [viewerFileName, setViewerFileName] = useState("");
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,7 +40,7 @@ function Chat() {
   };
 
   const handleSendMessage = () => {
-    if (currentInput.trim() != "" || uploadedFiles.length > 0) {
+    if (currentInput.trim() !== "" || uploadedFiles.length > 0) {
       const newUserMessage: ChatMessage = {
         textContent: currentInput,
         sender: "user",
@@ -48,7 +56,7 @@ function Chat() {
 
       setTimeout(() => {
         const systemResponse: ChatMessage = {
-          textContent: `Echo: ${newUserMessage.textContent}`,
+          textContent: `Here is some information related to: "${newUserMessage.textContent}." You can also view the <a href="/COMP_ARCH.pdf">Full Document.pdf</a> or the <a href="/ZagirLatypovResume.pdf">Read Me.txt</a>.`,
           sender: "system",
         };
 
@@ -56,7 +64,7 @@ function Chat() {
           ...previousMessages,
           systemResponse,
         ]);
-      });
+      }, 500);
     }
   };
 
@@ -86,6 +94,18 @@ function Chat() {
     );
   };
 
+  const handleOpenFileViewer = (fileUrl: string, fileName: string) => {
+    setViewerFileUrl(fileUrl);
+    setViewerFileName(fileName);
+    setIsFileViewerOpen(true);
+  };
+
+  const handleCloseFileViewer = () => {
+    setIsFileViewerOpen(false);
+    setViewerFileUrl("");
+    setViewerFileName("");
+  };
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
@@ -94,6 +114,7 @@ function Chat() {
             key={index}
             textContent={message.textContent}
             sender={message.sender}
+            openFileViewer={handleOpenFileViewer} // Pass the handler down
           />
         ))}
 
@@ -124,6 +145,13 @@ function Chat() {
           onFileChange={handleFileChange}
         />
       </div>
+
+      <FileViewerPopup
+        isOpen={isFileViewerOpen}
+        onClose={handleCloseFileViewer}
+        fileUrl={viewerFileUrl}
+        fileName={viewerFileName}
+      />
     </div>
   );
 }

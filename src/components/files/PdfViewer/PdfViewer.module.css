@@ -1,21 +1,13 @@
 .container {
     display: flex;
-    width: 30em; /* Hardcoded as requested */
-    height: 50em; /* Hardcoded as requested */
+    width: 30em;
+    height: 50em;
 }
 
-/* This class will be used for rendering individual highlight areas */
 .highlightArea {
-    background-color: rgba(255, 255, 0, 0.4); /* Yellow with some transparency */
-    position: absolute; /* Crucial: Positions the highlight over the PDF content */
-    pointer-events: none; /* Allows mouse events to pass through to the PDF */
-    border-radius: 2px; /* Slightly rounded corners */
+    background-color: rgba(255, 255, 0, 0.4);
+    position: absolute;
+    pointer-events: none;
+    border-radius: 2px;
 }
 
-/* The 'brawl' class from your original CSS. It's not used for highlights in the new structure,
-   but kept as it was in your original file. */
-.brawl {
-    background-color: #111111;
-    fill: #111111;
-    padding: 10px;
-}
