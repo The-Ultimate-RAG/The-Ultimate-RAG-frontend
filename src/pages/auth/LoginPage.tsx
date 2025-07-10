@@ -46,12 +46,9 @@ function LoginPage() {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.headerContainer}>
-        <Text
-          textContent={"Log In"}
-          fontWeight={700}
-          fontSize={"huge"}
-          colorVariant={"primary"}
-        />
+        <Text fontWeight={"bold"} fontSize={"huge"} colorVariant={"primary"}>
+          Log In
+        </Text>
       </div>
       <EmailInputField
         label={"Email"}
@@ -67,10 +64,9 @@ function LoginPage() {
       />
       <div className={styles.componentRow}>
         <Checkbox label={"Remember me"} size={fontSize} />
-        <Text
-          textContent={<a href={"/"}>Forgot password?</a>}
-          fontSize={"medium"}
-        />
+        <Text fontSize={"medium"}>
+          <a href={"/"}>Forgot password?</a>
+        </Text>
       </div>
       <div className={styles.loginAndRegisterContainer}>
         <Button
@@ -80,16 +76,9 @@ function LoginPage() {
           buttonRef={loginButtonRef}
           onClick={handleLoginClick}
         />
-        <Text
-          textContent={
-            <>
-              {"Don't have an account?"} <a href="/register">Register</a>
-            </>
-          }
-          fontSize={"small"}
-          interactable={true}
-          colorVariant={"primary"}
-        />
+        <Text fontSize={"small"} interactable={true} colorVariant={"primary"}>
+          Don't have an account? <a href="/register">Register</a>
+        </Text>
       </div>
     </div>
   );

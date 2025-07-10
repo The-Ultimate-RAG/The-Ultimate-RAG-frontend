@@ -83,12 +83,9 @@ function RegisterPage() {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.headerContainer}>
-        <Text
-          textContent={"Sign up"}
-          fontWeight={700}
-          fontSize={"huge"}
-          colorVariant={"primary"}
-        />
+        <Text fontWeight={"bold"} fontSize={"huge"} colorVariant={"primary"}>
+          Sign Up
+        </Text>
       </div>
       <EmailInputField
         label={"Email"}
@@ -127,16 +124,9 @@ function RegisterPage() {
           buttonRef={loginButtonRef}
           onClick={handleLoginClick}
         />
-        <Text
-          textContent={
-            <>
-              {"Already have an account?"} <a href="/login">Log in</a>
-            </>
-          }
-          fontSize={"small"}
-          interactable={true}
-          colorVariant={"primary"}
-        />
+        <Text fontSize={"small"} interactable={true} colorVariant={"primary"}>
+          Already have an account? <a href="/login">Log in</a>
+        </Text>
       </div>
     </div>
   );

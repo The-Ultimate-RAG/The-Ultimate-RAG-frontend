@@ -16,7 +16,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
 
   return (
     <button className={styles.chatButton}>
-      <Text textContent={props.label} colorVariant={"primary"} />
+      <Text colorVariant={"primary"}>{props.label}</Text>
     </button>
   );
 }

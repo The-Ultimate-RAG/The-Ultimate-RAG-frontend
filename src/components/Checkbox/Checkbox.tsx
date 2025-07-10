@@ -50,7 +50,7 @@ function Checkbox(props: Readonly<CheckboxProps>) {
           </svg>
         </span>
         <span className={styles.labelText} style={fontInlineStyles}>
-          <Text textContent={props.label} fontSize={size} />
+          <Text>{props.label}</Text>
         </span>
       </label>
     </div>
