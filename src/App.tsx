@@ -6,6 +6,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
 
 import NotFoundPage from "./pages/NotFoundPage";
 import PdfViewerComponent from "./components/Viewer/PdfViewerComponent";
@@ -31,6 +32,13 @@ const PdfViewerExample = () => {
 };
 
 function App() {
+
+  const theme = localStorage.getItem("theme") ?? "light";
+  
+  useEffect(() => {
+          localStorage.setItem("theme", theme);
+          document.body.className = theme;
+        }, [theme]);
 
   return (
     <Router>
