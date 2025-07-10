@@ -2,6 +2,7 @@ import TextInput from "../InputField/Basic/TextInput/TextInput";
 import styles from "./Chat.module.css";
 import React, { useEffect, useRef, useState } from "react";
 import Message from "../Message/Message";
+import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
 
 interface ChatProps {
   width?: number;
@@ -15,6 +16,7 @@ interface ChatMessage {
 function Chat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentInput, setCurrentInput] = useState<string>("");
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -30,7 +32,7 @@ function Chat() {
   };
 
   const handleSendMessage = () => {
-    if (currentInput.trim() != "") {
+    if (currentInput.trim() != "" || uploadedFiles.length > 0) {
       const newUserMessage: ChatMessage = {
         textContent: currentInput,
         sender: "user",
@@ -42,6 +44,7 @@ function Chat() {
       ]);
 
       setCurrentInput("");
+      setUploadedFiles([]);
 
       setTimeout(() => {
         const systemResponse: ChatMessage = {
@@ -63,6 +66,20 @@ function Chat() {
     }
   };
 
+  const handleFileChange = (files: File[] | null) => {
+    if (files && files.length > 0) {
+      setUploadedFiles((prevFiles) => {
+        const existingFileNames = new Set(prevFiles.map((file) => file.name));
+        const newUniqueFiles = files.filter(
+          (file) => !existingFileNames.has(file.name),
+        );
+        return [...prevFiles, ...newUniqueFiles];
+      });
+    } else if (files === null) {
+      setUploadedFiles([]);
+    }
+  };
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
@@ -78,11 +95,25 @@ function Chat() {
       </div>
 
       <div className={styles.inputArea}>
+        {uploadedFiles.length > 0 && ( //
+          <div className={styles.uploadedFilesContainer}>
+            {" "}
+            {uploadedFiles.map((file, index) => (
+              <UploadedFileCard
+                key={index}
+                fileName={file.name.split(".").slice(0, -1).join(".")}
+                fileType={file.name.split(".").pop() ?? ""}
+                fileSize={file.size}
+              />
+            ))}
+          </div>
+        )}
         <TextInput
           label={"Enter your question"}
           value={currentInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
+          onFileChange={handleFileChange}
         />
       </div>
     </div>
