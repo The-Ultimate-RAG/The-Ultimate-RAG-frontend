@@ -14,6 +14,7 @@ import Chat from "./components/Chat/Chat";
 import Button from "./components/buttons/MainButton/Button";
 import Sidebar from "./components/Sidebar/Sidebar";
 import UploadedFileCard from "./components/UploadedFileCard/UploadedFileCard";
+import Messenger from "./pages/Messenger/Messenger";
 
 // Lazy-loaded components
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
@@ -82,7 +83,7 @@ function App() {
             <Route path={"/chat"} element={<Chat />} />
             <Route path={"sidebar"} element={<Sidebar />} />
             <Route path={"/test"} element={<PdfViewerExample />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/" element={<Messenger />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path={"*"} element={<NotFoundPage />} />
