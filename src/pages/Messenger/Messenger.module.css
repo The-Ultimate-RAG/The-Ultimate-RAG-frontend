@@ -1,0 +1,15 @@
+.messenger {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.chatContainer {
+    flex: 1;
+}
+
+.sidebar {
+    flex-shrink: 0;
+}

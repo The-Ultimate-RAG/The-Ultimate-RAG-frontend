@@ -52,6 +52,17 @@
   border: 1px solid black;
 }
 
+.chatsContainer::-webkit-scrollbar-track {
+    display: none;
+    width: 0;
+}
+
+.chatsContainer::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+}
+
 .sidebarContainer .themeSwitcher {
   width: 100%;
   display: flex;
