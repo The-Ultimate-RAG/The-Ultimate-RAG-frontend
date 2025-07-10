@@ -12,7 +12,7 @@ import PdfViewerComponent from "./components/Viewer/PdfViewerComponent";
 import Chat from "./components/Chat/Chat";
 import Button from "./components/buttons/MainButton/Button";
 import Sidebar from "./components/Sidebar/Sidebar";
-import FileUpload from "./components/FileUpload/FileUpload";
+import UploadedFileCard from "./components/UploadedFileCard/UploadedFileCard";
 
 // Lazy-loaded components
 const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
@@ -57,8 +57,8 @@ function App() {
         <Button
           onClick={toggleTheme}
           text={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-          fontSize={"16px"}
           width={"200px"}
+          fontSize={"medium"}
         />
       </div>
       <div
@@ -79,8 +79,17 @@ function App() {
           }
         >
           <Routes>
+            <Route
+              path={"/file-card"}
+              element={
+                <UploadedFileCard
+                  fileName={"Some filename"}
+                  fileType={"pdf"}
+                  fileSize={42398443}
+                />
+              }
+            />
             <Route path={"/chat"} element={<Chat />} />
-            <Route path={"/file-upload"} element={<FileUpload />} />
             <Route path={"sidebar"} element={<Sidebar />} />
             <Route path={"/test"} element={<PdfViewerExample />} />
             <Route path="/" element={<Navigate to="/login" replace />} />
