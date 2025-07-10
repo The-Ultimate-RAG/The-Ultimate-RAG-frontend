@@ -26,7 +26,9 @@ const FileViewerPopup = ({
       <div className={styles.backdrop} onClick={onClose} />
       <div className={`${styles.popupContainer} ${isOpen ? styles.open : ""}`}>
         <header className={styles.popupHeader}>
-          <Text className={styles.fileName}>{fileName}</Text>
+          <Text className={styles.fileName} fontWeight={"bold"}>
+            {fileName}
+          </Text>
           <Button onClick={onClose} width="80px" height="40px">
             Close
           </Button>
