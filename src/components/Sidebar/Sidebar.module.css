@@ -1,7 +1,61 @@
+@import "../_variables.css";
+
 .sidebarContainer {
-    width: 100%;
+    width: 25%;
+    min-width: 250px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: flex-start;
+    background-color: var(--background-color-primary);
+}
+
+.sidebarContainer .buttonContainer {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding: 10px;
+}
+
+.sidebarContainer .buttonContainer .addChatButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.sidebarContainer .buttonContainer .searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.sidebarContainer .chatsContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.addChatButton {
+  width: 150%; /* Ширина кнопки "Добавить чат" */
+  height: 60px; /* Высота кнопки "Добавить чат" */
+  margin-bottom: 10px; /* Отступ снизу для разделения с SearchButton */
+}
+
+.hide-neighbor {
+  opacity: 0;
+  pointer-events: none; /* Отключает взаимодействие с кнопкой */
+  transform: translateX(-100px); /* Сдвигает кнопку влево */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Плавная анимация скрытия/сдвига */
 }
