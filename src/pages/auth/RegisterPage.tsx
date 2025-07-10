@@ -118,7 +118,7 @@ function RegisterPage() {
       </div>
       <div className={styles.loginAndRegisterContainer}>
         <Button
-          text={"Register"}
+          children={"Register"}
           width={width}
           fontSize={"large"}
           buttonRef={loginButtonRef}

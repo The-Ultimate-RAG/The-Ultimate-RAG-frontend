@@ -80,6 +80,12 @@ function Chat() {
     }
   };
 
+  const handleRemoveFile = (indexToRemove: number) => {
+    setUploadedFiles((prevFiles) =>
+      prevFiles.filter((_, index) => index !== indexToRemove),
+    );
+  };
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
@@ -95,7 +101,7 @@ function Chat() {
       </div>
 
       <div className={styles.inputArea}>
-        {uploadedFiles.length > 0 && ( //
+        {uploadedFiles.length > 0 && (
           <div className={styles.uploadedFilesContainer}>
             {" "}
             {uploadedFiles.map((file, index) => (
@@ -104,6 +110,8 @@ function Chat() {
                 fileName={file.name.split(".").slice(0, -1).join(".")}
                 fileType={file.name.split(".").pop() ?? ""}
                 fileSize={file.size}
+                onClose={() => handleRemoveFile(index)}
+                className={styles.uploadedFileCardEnter}
               />
             ))}
           </div>

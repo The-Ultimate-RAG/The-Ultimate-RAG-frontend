@@ -1,15 +1,24 @@
+// UploadedFileCard.tsx
 import styles from "./UploadedFileCard.module.css";
 import Text from "../Text/Text";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect
 
 interface UploadedFileCardProps {
   fileName: string;
   fileType: string;
   fileSize: number;
+  onClose: () => void;
+  className?: string; // Add className prop
 }
 
 function UploadedFileCard(props: Readonly<UploadedFileCardProps>) {
   const [showRawSize, setShowRawSize] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // New state for animation trigger
+
+  useEffect(() => {
+    // Trigger animation after component mounts
+    setIsMounted(true);
+  }, []);
 
   const formatFileSize = (bytes: number) => {
     const k = 1024;
@@ -27,7 +36,12 @@ function UploadedFileCard(props: Readonly<UploadedFileCardProps>) {
   };
 
   return (
-    <div className={styles.cardContainer}>
+    <div
+      className={`${styles.cardContainer} ${isMounted ? styles.enter : ""} ${props.className || ""}`}
+    >
+      <button className={styles.closeButton} onClick={props.onClose}>
+        &times;
+      </button>
       <Text
         fontWeight={"bold"}
         colorVariant={"primary"}

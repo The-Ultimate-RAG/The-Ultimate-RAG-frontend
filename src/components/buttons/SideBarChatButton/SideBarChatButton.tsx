@@ -11,7 +11,7 @@ interface ChatButtonProps {
 function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
-  
+
   const handleClick = () => {
     navigate(`/chat/${props.key}`);
     setIsActive(true);
@@ -31,9 +31,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
 
   return (
     <button className={styles.chatButton}>
-      <Text colorVariant={isActive ? "button" : "primary"}>
-      {props.label}
-      </Text>
+      <Text colorVariant={isActive ? "button" : "primary"}>{props.label}</Text>
     </button>
   );
 }

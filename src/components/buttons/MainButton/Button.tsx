@@ -3,18 +3,19 @@ import Text from "../../Text/Text";
 import React from "react";
 
 interface ButtonProps {
-  text: string;
+  children: string;
   width?: string;
   fontSize?: "small" | "medium" | "large";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonRef?: React.Ref<HTMLButtonElement>;
   height?: string;
   borderRadius?: "default" | "round";
+  className?: string;
 }
 
 function Button(props: Readonly<ButtonProps>) {
   const {
-    text,
+    children,
     width = "100px",
     fontSize = "large",
     buttonRef,
@@ -29,13 +30,13 @@ function Button(props: Readonly<ButtonProps>) {
 
   return (
     <button
-      className={styles.button}
+      className={`${styles.button} ${props.className}`}
       style={inlineStyles}
       ref={buttonRef}
       onClick={onClick}
     >
       <Text interactable={false} fontWeight={"bold"} fontSize={fontSize}>
-        {text}
+        {children}
       </Text>
     </button>
   );

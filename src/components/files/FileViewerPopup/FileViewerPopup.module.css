@@ -1,0 +1,50 @@
+@import "../../_variables.css";
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  transition: opacity 0.3s var(--transition-timing-ease-in-out);
+}
+
+.popupContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 45vw;
+  min-width: 500px;
+  max-width: 800px;
+  background-color: var(--background-color-primary);
+  z-index: 101;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  transition: transform 0.4s var(--transition-timing-ease-in-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.popupContainer.open {
+  transform: translateX(0);
+}
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color-default);
+}
+
+.fileName {
+  font-size: var(--font-size-large);
+  color: var(--text-color-primary);
+  margin: 0;
+}
+
+.viewerWrapper {
+  flex-grow: 1;
+  overflow: hidden;
+  padding: var(--spacing-xl);
+}

@@ -1,3 +1,4 @@
+/* UploadedFileCard.module.css */
 .cardContainer {
     display: flex;
     flex-direction: column;
@@ -11,14 +12,28 @@
     gap: 0;
     box-shadow: var(--shadow-default);
     flex-shrink: 0;
-    transform: scale(0.7);
     transform-origin: top left;
     margin: 0 -72px -32px 0;
+    position: relative;
+
+    opacity: 0;
+    transform: translateY(50px) scale(0.7);
+    transition:
+        opacity var(--transition-speed-default) var(--bezier-custom),
+        transform var(--transition-speed-default) var(--bezier-custom);
 }
 
+.cardContainer.enter {
+    opacity: 1;
+    transform: translateY(0) scale(0.7);
+}
 
 .fileName {
     margin-bottom: var(--spacing-zero);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 .fileTypeExpansion {
@@ -30,3 +45,27 @@
     cursor: pointer;
 }
 
+.closeButton {
+    position: absolute;
+    top: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: var(--text-color-secondary);
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    transition: all var(--transition-speed-fast) var(--transition-timing-ease-in-out)
+}
+
+.closeButton:hover {
+    background-color: var(--color-primary);
+    color: var(--text-color-button);
+}

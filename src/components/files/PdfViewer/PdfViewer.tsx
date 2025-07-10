@@ -1,4 +1,3 @@
-import React, { useEffect, useMemo } from "react";
 import { SpecialZoomLevel, Viewer, Worker } from "@react-pdf-viewer/core";
 import { pageNavigationPlugin } from "@react-pdf-viewer/page-navigation";
 import { searchPlugin, SearchTargetPage } from "@react-pdf-viewer/search";
@@ -9,7 +8,7 @@ import "@react-pdf-viewer/page-navigation/lib/styles/index.css";
 import "@react-pdf-viewer/zoom/lib/styles/index.css";
 import "@react-pdf-viewer/highlight/lib/styles/index.css";
 
-import styles from "./PdfViewerComponent.module.css";
+import styles from "./PdfViewer.module.css";
 
 interface PdfViewerComponentProps {
   pdfUrl: string;
@@ -17,7 +16,7 @@ interface PdfViewerComponentProps {
   textToHighlight?: string;
 }
 
-const PdfViewerComponent = (props: PdfViewerComponentProps) => {
+const PdfViewer = (props: PdfViewerComponentProps) => {
   const pageNavigationPluginInstance = pageNavigationPlugin();
   const searchPluginInstance = searchPlugin();
 
@@ -53,4 +52,4 @@ const PdfViewerComponent = (props: PdfViewerComponentProps) => {
     </div>
   );
 };
-export default PdfViewerComponent;
+export default PdfViewer;
