@@ -9,6 +9,7 @@
     align-items: left;
     justify-content: flex-start;
     background-color: var(--background-color-primary);
+    border: 1px solid black;
 }
 
 .sidebarContainer .buttonContainer {
@@ -20,6 +21,9 @@
   gap: 10px;
   position: relative;
   padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid black;
 }
 
 .sidebarContainer .buttonContainer .addChatButton {
@@ -45,12 +49,16 @@
   justify-content: flex-start;
   flex-grow: 1;
   overflow-y: auto;
+  border: 1px solid black;
 }
 
-.addChatButton {
-  width: 150%; /* Ширина кнопки "Добавить чат" */
-  height: 60px; /* Высота кнопки "Добавить чат" */
-  margin-bottom: 10px; /* Отступ снизу для разделения с SearchButton */
+.sidebarContainer .themeSwitcher {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .hide-neighbor {

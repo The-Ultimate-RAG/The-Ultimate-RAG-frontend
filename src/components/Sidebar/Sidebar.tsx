@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "../buttons/MainButton/Button";
 import styles from "./SideBar.module.css";
 import SearchButton from "../buttons/SearchButton/SearchButton";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 interface ChatButton {
   title: string;
@@ -34,7 +35,7 @@ function Sidebar() {
     <aside className={styles.sidebarContainer}>
       <div className={styles.buttonContainer}>
         <div className={isSearchExpanded ? styles.hideNeighbor : styles.addChatButton}>
-        <Button text={"+ Add chat"} height={baseButtonHeight} width="100%" borderRadius="2rem" onClick={handleAddChat} />
+        <Button text={"+ Add chat"} height={baseButtonHeight} width="100%" borderRadius="default" onClick={handleAddChat} />
         </div>
         <nav className={styles.searchButton}>
         <SearchButton 
@@ -48,6 +49,10 @@ function Sidebar() {
         {chats.map((chat, index) => (
         <SideBarChatButton key={index} label={chat.title} />
         ))}
+        </div>
+
+        <div className={styles.themeSwitcher}>
+          <ThemeSwitcher />
         </div>
         
     </aside>

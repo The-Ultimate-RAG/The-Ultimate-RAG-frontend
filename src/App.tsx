@@ -31,18 +31,6 @@ const PdfViewerExample = () => {
 };
 
 function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") ?? "light";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.body.className = theme;
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
 
   return (
     <Router>
@@ -54,12 +42,6 @@ function App() {
           margin: "12px",
         }}
       >
-        <Button
-          onClick={toggleTheme}
-          text={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-          width={"200px"}
-          fontSize={"medium"}
-        />
       </div>
       <div
         style={{
