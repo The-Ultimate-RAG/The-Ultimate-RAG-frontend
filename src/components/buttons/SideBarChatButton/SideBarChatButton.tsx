@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styles from "./SideBarChatButton.module.css";
 import Text from "../../Text/Text";
 
@@ -9,14 +10,31 @@ interface ChatButtonProps {
 
 function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   const navigate = useNavigate();
-
+  const [isActive, setIsActive] = useState(false);
+  
   const handleClick = () => {
     navigate(`/chat/${props.key}`);
+    setIsActive(true);
+  };
+
+  const handleMouseDown = () => {
+    setIsActive(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsActive(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsActive(false);
   };
 
   return (
     <button className={styles.chatButton}>
-      <Text textContent={props.label} colorVariant={"primary"} />
+      <Text
+      textContent={props.label}
+      colorVariant={isActive ? "button" : "primary"}
+      />
     </button>
   );
 }

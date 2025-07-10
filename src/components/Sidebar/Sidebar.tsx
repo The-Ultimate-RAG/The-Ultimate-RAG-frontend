@@ -15,7 +15,7 @@ function Sidebar() {
     };
 
     const [chats, setChats] = useState<ChatButton[]>([]);
-    const baseButtonHeight = "60px"; // Базовая высота кнопки
+    const baseButtonHeight = "40px"; // Базовая высота кнопки
 
   const handleAddChat = () => {
     const newChat: ChatButton = {
@@ -33,19 +33,22 @@ function Sidebar() {
   return (
     <aside className={styles.sidebarContainer}>
       <div className={styles.buttonContainer}>
-        <div className={isSearchExpanded ? styles["hide-neighbor"] : styles["add-chat-button"]}>
-        <Button text={"+ Add chat"} height={baseButtonHeight} width="250px" borderRadius="2rem" onClick={handleAddChat} />
+        <div className={isSearchExpanded ? styles.hideNeighbor : styles.addChatButton}>
+        <Button text={"+ Add chat"} height={baseButtonHeight} width="100%" borderRadius="2rem" onClick={handleAddChat} />
         </div>
+        <nav className={styles.searchButton}>
         <SearchButton 
                 onSearch={handleSearchSubmit}
                 onToggleExpand={handleSearchToggle}
                 initialSize={baseButtonHeight}
             />
+        </nav>
         </div>
-        
+        <div className={styles.chatsContainer}>
         {chats.map((chat, index) => (
         <SideBarChatButton key={index} label={chat.title} />
         ))}
+        </div>
         
     </aside>
   );
