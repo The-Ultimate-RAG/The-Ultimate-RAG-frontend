@@ -10,7 +10,7 @@
 
 .userMessageBox {
     background-color: var(--color-primary);
-    max-width: 50%;
+    max-width: 60%;
     margin-left: auto;
     align-self: flex-end;
 }

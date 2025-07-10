@@ -14,7 +14,7 @@ function Message(props: Readonly<MessageProps>) {
 
   return (
     <div className={messageStyle}>
-      <Text textContent={textContent} interactable={true} fontSize={"14px"} />
+      <Text interactable={true}>{textContent}</Text>
     </div>
   );
 }

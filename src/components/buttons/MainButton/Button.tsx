@@ -9,6 +9,7 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   buttonRef?: React.Ref<HTMLButtonElement>;
   height?: string;
+  borderRadius?: "default" | "round";
 }
 
 function Button(props: Readonly<ButtonProps>) {
@@ -33,12 +34,9 @@ function Button(props: Readonly<ButtonProps>) {
       ref={buttonRef}
       onClick={onClick}
     >
-      <Text
-        textContent={text}
-        interactable={false}
-        fontWeight={700}
-        fontSize={fontSize}
-      />
+      <Text interactable={false} fontWeight={"bold"} fontSize={fontSize}>
+        {text}
+      </Text>
     </button>
   );
 }
