@@ -1,45 +1,17 @@
 // In App.tsx
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher";
-
+import React, { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
-import PdfViewerComponent from "./components/files/PdfViewer/PdfViewer";
-import Chat from "./components/Chat/Chat";
-import Button from "./components/buttons/MainButton/Button";
 import Sidebar from "./components/Sidebar/Sidebar";
-import UploadedFileCard from "./components/UploadedFileCard/UploadedFileCard";
 import Messenger from "./pages/Messenger/Messenger";
 
-// Lazy-loaded components
-const LoginPage = lazy(() => import("./pages/auth/LoginPage"));
-const RegisterPage = lazy(() => import("./pages/auth/RegisterPage"));
-
-const PdfViewerExample = () => {
-  return (
-    <PdfViewerComponent
-      pdfUrl="/COMP_ARCH.pdf"
-      textToHighlight={
-        "Reference: CUDA Extension for C/C++ for GPU Programming"
-      }
-      initialPage={1466}
-    />
-  );
-};
-
 function App() {
-
   const theme = localStorage.getItem("theme") ?? "light";
-  
+
   useEffect(() => {
-          localStorage.setItem("theme", theme);
-          document.body.className = theme;
-        }, [theme]);
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+  }, [theme]);
 
   return (
     <Router>
@@ -50,8 +22,7 @@ function App() {
           top: "0",
           margin: "12px",
         }}
-      >
-      </div>
+      ></div>
       <div
         style={{
           display: "flex",
@@ -70,12 +41,9 @@ function App() {
           }
         >
           <Routes>
-            <Route path={"/chat"} element={<Chat />} />
             <Route path={"sidebar"} element={<Sidebar />} />
-            <Route path={"/test"} element={<PdfViewerExample />} />
-            <Route path="/" element={<Messenger />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path={"/"} element={<Messenger />} />
+            <Route path={"/chats/:chatId"} element={<Messenger />} />
             <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </Suspense>
