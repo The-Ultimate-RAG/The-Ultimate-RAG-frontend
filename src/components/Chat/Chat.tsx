@@ -37,7 +37,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           const response = await fetch("/new_chat", { method: "POST" });
           if (response.ok) {
             const data = await response.json();
-            navigate(`/chats/${data.chatId}`, { replace: true });
+            navigate(`/chats/id=${data.chat_id}`, { replace: true });
           }
         } catch (error) {
           console.error("Failed to create a new chat:", error);
@@ -48,16 +48,20 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
   }, [chat_id, navigate]);
 
   useEffect(() => {
+    console.log(`Fetching history for chatId: ${chat_id}`);
     if (chat_id) {
       const fetchChatHistory = async () => {
         try {
-          const response = await fetch(`/api/chats/${chat_id}`);
+          const response = await fetch(`/chats/id=${chat_id}`);
           if (response.ok) {
             const data = await response.json();
+            console.log(`Fetched messages for ${chat_id}:`, data.messages);
             setMessages(data.messages || []);
+          } else {
+            console.error(`Fetch failed with status: ${response.status}`);
           }
         } catch (error) {
-          console.error("Failed to fetch chat history:", error);
+          console.error("Fetch error:", error);
         }
       };
       fetchChatHistory();

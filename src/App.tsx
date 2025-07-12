@@ -1,8 +1,6 @@
-// In App.tsx
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
-import Sidebar from "./components/Sidebar/Sidebar";
 import Messenger from "./pages/Messenger/Messenger";
 
 function App() {
@@ -41,9 +39,8 @@ function App() {
           }
         >
           <Routes>
-            <Route path={"sidebar"} element={<Sidebar />} />
             <Route path={"/"} element={<Messenger />} />
-            <Route path={"/chats/:chatId"} element={<Messenger />} />
+            <Route path={"/chats/id=:chatId"} element={<Messenger />} />
             <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </Suspense>

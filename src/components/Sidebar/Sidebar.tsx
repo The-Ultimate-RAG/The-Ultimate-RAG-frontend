@@ -7,53 +7,58 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { useNavigate } from "react-router-dom";
 
 interface ChatButton {
+  id: string;
   title: string;
-}
-
-interface ChatGroup {
-  title: string;
-  chats: ChatButton[];
 }
 
 function Sidebar() {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const navigate = useNavigate();
   const handleSearchToggle = (expanded: boolean) => {
     setIsSearchExpanded(expanded);
   };
-  const [chatGroups, setChatGroups] = useState<ChatGroup[]>([]);
+
   const [chats, setChats] = useState<ChatButton[]>([]);
-  const navigate = useNavigate();
-  const baseButtonHeight = "40px"; // Базовая высота кнопки
+  const baseButtonHeight = "40px";
 
   useEffect(() => {
-    const fetchChatGroups = async () => {
-      const response = await fetch("/api/user_chats");
-      if (response.ok) {
-        const data = await response.json();
-        setChatGroups(data);
-      } else {
-        console.error("Failed to fetch chats groups");
+    const fetchChats = async () => {
+      const response = await fetch("/list_chats");
+      if (!response.ok) {
+        throw new Error(`Error, status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.chats) {
+        setChats(data.chats);
       }
     };
 
-    fetchChatGroups();
+    fetchChats();
   }, []);
 
-  const refetchChats = async () => {
-    const response = await fetch("/api/user_chats");
-    if (response.ok) {
-      const data = await response.json();
-      setChatGroups(data);
-    }
-  };
-
   const handleAddChat = async () => {
-    const response = await fetch("/new_chat", { method: "POST" });
-    if (response.ok) {
-      const data = await response.json();
-      navigate(`/chats/${data.chat_id}`);
-      refetchChats();
+    const response = await fetch("/new_chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: "New chat" }),
+    });
+
+    if (!response.ok) {
+      console.error(`New chat failed: ${response.status}`);
+      return;
     }
+    const data = await response.json();
+    navigate(`/chats/id=${data.chat_id}`);
+
+    const fetchChats = async () => {
+      const res = await fetch("/list_chats");
+      if (res.ok) {
+        const chatData = await res.json();
+        console.log("Updated chats:", chatData.chats);
+        setChats(chatData.chats || []);
+      }
+    };
+    fetchChats();
   };
 
   const handleSearchSubmit = (query: string) => {
@@ -70,12 +75,13 @@ function Sidebar() {
           }
         >
           <Button
-            children={"+ Add chat"}
             height={baseButtonHeight}
             width="100%"
             borderRadius="round"
             onClick={handleAddChat}
-          />
+          >
+            + Add chat
+          </Button>
         </div>
         <nav className={styles.searchButton}>
           <SearchButton
@@ -87,7 +93,7 @@ function Sidebar() {
       </div>
       <div className={styles.chatsContainer}>
         {chats.map((chat, index) => (
-          <SideBarChatButton key={index} label={chat.title} />
+          <SideBarChatButton key={index} chatId={chat.id} title={chat.title} />
         ))}
       </div>
 
