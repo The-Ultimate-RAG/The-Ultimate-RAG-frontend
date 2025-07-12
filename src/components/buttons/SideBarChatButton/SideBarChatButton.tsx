@@ -4,8 +4,8 @@ import styles from "./SideBarChatButton.module.css";
 import Text from "../../Text/Text";
 
 interface ChatButtonProps {
-  label: string;
-  key: number;
+  title: string;
+  chatId: string;
 }
 
 function SideBarChatButton(props: Readonly<ChatButtonProps>) {
@@ -13,8 +13,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    navigate(`/chat/${props.key}`);
-    setIsActive(true);
+    navigate(`/chats/id=${props.chatId}`);
   };
 
   const handleMouseDown = () => {
@@ -30,8 +29,14 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   };
 
   return (
-    <button className={styles.chatButton}>
-      <Text colorVariant={isActive ? "button" : "primary"}>{props.label}</Text>
+    <button
+      className={styles.chatButton}
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Text colorVariant={isActive ? "button" : "primary"}>{props.title}</Text>
     </button>
   );
 }
