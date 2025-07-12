@@ -118,26 +118,51 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         }
       }
 
-      setMessages((prev) =>
-        prev.map((message) =>
-          message.id === systemMessageId
-            ? {
-                ...message,
-                textContent: accumulatedResponse,
-                isStreaming: false,
-              }
-            : message,
-        ),
-      );
+      // --- Start of adapted part ---
+      try {
+        const replaceResponse = await fetch("/replace_message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: accumulatedResponse,
+            chat_id: chat_id, // Use chat_id from useParams
+          }),
+        });
 
-      await fetch("/replace_message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: accumulatedResponse,
-          chatId: chat_id,
-        }),
-      });
+        if (!replaceResponse.ok) {
+          throw new Error(`Replace error: ${replaceResponse.status}`);
+        }
+
+        const data = await replaceResponse.json(); // expects { "updated_message": "..." }
+
+        // Update the message content with the potentially updated message from the backend
+        setMessages((prev) =>
+          prev.map((message) =>
+            message.id === systemMessageId
+              ? {
+                  ...message,
+                  textContent: data.updated_message, // Use the updated_message from the backend
+                  isStreaming: false,
+                }
+              : message,
+          ),
+        );
+      } catch (error) {
+        console.error("Error replacing message:", error);
+        // Optionally, update the message to reflect the error to the user
+        setMessages((prev) =>
+          prev.map((message) =>
+            message.id === systemMessageId
+              ? {
+                  ...message,
+                  textContent: `${accumulatedResponse} (Error processing response: ${error})`, // Append error to existing content
+                  isStreaming: false,
+                }
+              : message,
+          ),
+        );
+      }
+      // --- End of adapted part ---
     },
     [chat_id],
   );
