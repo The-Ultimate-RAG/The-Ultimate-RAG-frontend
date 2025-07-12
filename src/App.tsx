@@ -40,7 +40,7 @@ function App() {
         >
           <Routes>
             <Route path={"/"} element={<Messenger />} />
-            <Route path={"/chats/id=:chatId"} element={<Messenger />} />
+            <Route path={"/chats/:chatId"} element={<Messenger />} />
             <Route path={"*"} element={<NotFoundPage />} />
           </Routes>
         </Suspense>

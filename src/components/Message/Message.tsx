@@ -22,7 +22,7 @@ function Message(props: Readonly<MessageProps>) {
     if (target.tagName === "A" && target.hasAttribute("href")) {
       event.preventDefault();
       const fileUrl = target.getAttribute("href");
-      const fileName = target.textContent || "";
+      const fileName = target.textContent ?? "";
       if (fileUrl) {
         if (openFileViewer) {
           openFileViewer(fileUrl, fileName);

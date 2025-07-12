@@ -11,6 +11,11 @@ interface ChatButton {
   title: string;
 }
 
+interface ChatGroup {
+  title: string;
+  chats: ChatButton[];
+}
+
 function Sidebar() {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +34,11 @@ function Sidebar() {
       }
       const data = await response.json();
       if (data.chats) {
-        setChats(data.chats);
+        const allChats: ChatButton[] = [];
+        data.chats.forEach((group: ChatGroup) => {
+          allChats.push(...group.chats);
+        });
+        setChats(allChats);
       }
     };
 
@@ -47,18 +56,11 @@ function Sidebar() {
       console.error(`New chat failed: ${response.status}`);
       return;
     }
-    const data = await response.json();
-    navigate(`/chats/id=${data.chat_id}`);
+    const newChat = await response.json(); // e.g., { id: '...', title: 'New chat' }
 
-    const fetchChats = async () => {
-      const res = await fetch("/list_chats");
-      if (res.ok) {
-        const chatData = await res.json();
-        console.log("Updated chats:", chatData.chats);
-        setChats(chatData.chats || []);
-      }
-    };
-    fetchChats();
+    setChats((prevChats) => [newChat, ...prevChats]);
+
+    navigate(`/chats/${newChat.id}`);
   };
 
   const handleSearchSubmit = (query: string) => {
@@ -92,8 +94,12 @@ function Sidebar() {
         </nav>
       </div>
       <div className={styles.chatsContainer}>
-        {chats.map((chat, index) => (
-          <SideBarChatButton key={index} chatId={chat.id} title={chat.title} />
+        {chats.map((chat) => (
+          <SideBarChatButton
+            key={chat.id}
+            chatId={chat.id}
+            title={chat.title}
+          />
         ))}
       </div>
 

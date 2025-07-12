@@ -13,7 +13,7 @@ interface ChatProps {
 
 interface ChatMessage {
   id: string;
-  textContent: string;
+  content: string;
   sender: "user" | "system";
   isStreaming?: boolean;
 }
@@ -37,7 +37,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           const response = await fetch("/new_chat", { method: "POST" });
           if (response.ok) {
             const data = await response.json();
-            navigate(`/chats/id=${data.chat_id}`, { replace: true });
+            navigate(`/chats/${data.chat_id}`, { replace: true });
           }
         } catch (error) {
           console.error("Failed to create a new chat:", error);
@@ -52,21 +52,24 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
     if (chat_id) {
       const fetchChatHistory = async () => {
         try {
-          const response = await fetch(`/chats/id=${chat_id}`);
+          const response = await fetch(`/chats/${chat_id}`);
           if (response.ok) {
             const data = await response.json();
             console.log(`Fetched messages for ${chat_id}:`, data.messages);
-            setMessages(data.messages || []);
+            setMessages(Array.isArray(data.messages) ? data.messages : []);
+          } else if (response.status === 404) {
+            console.error(`Chat with ID ${chat_id} not found.`);
           } else {
             console.error(`Fetch failed with status: ${response.status}`);
           }
         } catch (error) {
-          console.error("Fetch error:", error);
+          console.error("An unexpected error occurred during fetch:", error);
+          setMessages([]);
         }
       };
       fetchChatHistory();
     }
-  }, [chat_id]);
+  }, [chat_id, navigate]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -90,7 +93,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
       setMessages((prev) =>
         prev.map((message) =>
           message.id === systemMessageId
-            ? { ...message, textContent: "", isStreaming: true }
+            ? { ...message, content: "", isStreaming: true }
             : message,
         ),
       );
@@ -107,7 +110,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           setMessages((prev) =>
             prev.map((message) =>
               message.id === systemMessageId
-                ? { ...message, textContent: accumulatedResponse }
+                ? { ...message, content: accumulatedResponse }
                 : message,
             ),
           );
@@ -127,21 +130,32 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           message.id === systemMessageId
             ? {
                 ...message,
-                textContent: accumulatedResponse,
+                content: accumulatedResponse,
                 isStreaming: false,
               }
             : message,
         ),
       );
 
-      await fetch("/replace_message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: accumulatedResponse,
-          chatId: chat_id,
-        }),
-      });
+      try {
+        const response = await fetch("/replace_message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: accumulatedResponse,
+            chatId: chat_id,
+          }),
+        });
+
+        if (!response.ok) {
+          console.error(
+            "Failed to persist assistant message. Status:",
+            response.status,
+          );
+        }
+      } catch (error) {
+        console.error("Error persisting assistant message:", error);
+      }
     },
     [chat_id],
   );
@@ -154,7 +168,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
     if (currentInput.trim() !== "" || uploadedFiles.length > 0) {
       const newUserMessage: ChatMessage = {
         id: `user-${Date.now()}`,
-        textContent: currentInput,
+        content: currentInput,
         sender: "user",
       };
       setMessages((previousMessages: ChatMessage[]) => [
@@ -166,7 +180,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
       const systemMessageId = `system-${Date.now()}`;
       const placeholderMessage: ChatMessage = {
         id: systemMessageId,
-        textContent: "",
+        content: "",
         sender: "system",
         isStreaming: true,
       };
@@ -195,7 +209,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           console.error("Backend response not OK:", response.status, errorText);
           const errorMessage: ChatMessage = {
             id: systemMessageId,
-            textContent: `Couldn't get a response. Error: ${response.status}`,
+            content: `Couldn't get a response. Error: ${response.status}`,
             sender: "system",
             isStreaming: false,
           };
@@ -209,7 +223,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         console.error("Failed to send message:", error);
         const errorMessage: ChatMessage = {
           id: systemMessageId,
-          textContent: "An error occurred while sending your message.",
+          content: "An error occurred while sending your message.",
           sender: "system",
           isStreaming: false,
         };
@@ -266,7 +280,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         {messages.map((message) => (
           <Message
             key={message.id}
-            textContent={message.textContent}
+            textContent={message.content}
             sender={message.sender}
             openFileViewer={handleOpenFileViewer}
             isStreaming={message.isStreaming}

@@ -13,7 +13,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    navigate(`/chats/id=${props.chatId}`);
+    navigate(`/chats/${props.chatId}`);
   };
 
   const handleMouseDown = () => {
