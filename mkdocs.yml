@@ -1,0 +1,37 @@
+site_name: Documentation
+site_url: https://multesh.github.io/your-repo-name/
+
+theme:
+  name: material
+  palette: #
+    - scheme: default # Light mode
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate # Dark mode
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features: # Optional: Enable cool Material for MkDocs features
+    - navigation.tabs # Top-level navigation as tabs (if you have many main sections)
+    - navigation.sections # Sections in sidebar are collapsible
+    - navigation.expand # All sidebar sections expanded by default
+    - navigation.indexes # If you have `index.md` in subfolders, they'll appear as section index
+    - search.highlight # Highlight search results
+    - search.suggest # Search suggestions
+    - content.code.copy # Add a copy button to code blocks
+    - content.tabs # Enable tabbed content in Markdown
+    - toc.follow # Table of Contents on right scrolls with page
+
+nav:
+  - Home: index.md # Main page, maps to docs/index.md
+  - Getting Started: # A section in the sidebar
+      - Overview: getting-started/index.md # Maps to docs/getting-started/index.md
+      - Installation: getting-started/installation.md
+      - Configuration: getting-started/configuration.md
+  - Usage: usage.md # Another top-level item
+  - API Reference: api-reference.md
+  - Contributing:
+      - How to Contribute: contributing/how-to-contribute.md
+      - Code of Conduct: contributing/code-of-conduct.md
+  - About: about.md # Another top-level page
