@@ -28,7 +28,7 @@ function Sidebar() {
 
   useEffect(() => {
     const fetchChats = async () => {
-      const response = await fetch("/list_chats");
+      const response = await fetch("/_api/list_chats");
       if (!response.ok) {
         throw new Error(`Error, status: ${response.status}`);
       }
@@ -46,7 +46,7 @@ function Sidebar() {
   }, []);
 
   const handleAddChat = async () => {
-    const response = await fetch("/new_chat", {
+    const response = await fetch("/_api/new_chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: "New chat" }),

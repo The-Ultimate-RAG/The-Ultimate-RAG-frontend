@@ -52,7 +52,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
     if (chat_id) {
       const fetchChatHistory = async () => {
         try {
-          const response = await fetch(`/chats/${chat_id}`);
+          const response = await fetch(`/_api/chats/${chat_id}`);
           if (response.ok) {
             const data = await response.json();
             console.log(`Fetched messages for ${chat_id}:`, data.messages);
@@ -138,7 +138,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
       );
 
       try {
-        const response = await fetch("/replace_message", {
+        const response = await fetch("/_api/replace_message", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -197,7 +197,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
       setUploadedFiles([]);
 
       try {
-        const response = await fetch("/message_with_docs", {
+        const response = await fetch("/_api/message_with_docs", {
           method: "POST",
           body: formData,
         });
