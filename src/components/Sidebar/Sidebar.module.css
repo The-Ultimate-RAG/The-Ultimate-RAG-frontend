@@ -6,47 +6,45 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     justify-content: flex-start;
     background-color: var(--background-color-primary);
 }
 
 .sidebarContainer .buttonContainer {
-  box-sizing: border-box;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-  padding: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding: 20px 10px;
 }
 
 .sidebarContainer .buttonContainer .addChatButton {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .sidebarContainer .buttonContainer .searchButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .sidebarContainer .chatsContainer {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex-grow: 1;
-  overflow-y: auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 .chatsContainer::-webkit-scrollbar-track {
@@ -61,15 +59,15 @@
 }
 
 .sidebarContainer .themeSwitcher {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .hide-neighbor {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }

@@ -30,22 +30,22 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
 
-  useEffect(() => {
-    if (!chat_id) {
-      const createNewChat = async () => {
-        try {
-          const response = await fetch("/new_chat", { method: "POST" });
-          if (response.ok) {
-            const data = await response.json();
-            navigate(`/chats/${data.chat_id}`, { replace: true });
-          }
-        } catch (error) {
-          console.error("Failed to create a new chat:", error);
-        }
-      };
-      createNewChat();
-    }
-  }, [chat_id, navigate]);
+  // useEffect(() => {
+  //   if (!chat_id) {
+  //     const createNewChat = async () => {
+  //       try {
+  //         const response = await fetch("/new_chat", { method: "POST" });
+  //         if (response.ok) {
+  //           const data = await response.json();
+  //           navigate(`/chats/${data.chat_id}`, { replace: true });
+  //         }
+  //       } catch (error) {
+  //         console.error("Failed to create a new chat:", error);
+  //       }
+  //     };
+  //     createNewChat();
+  //   }
+  // }, [chat_id, navigate]);
 
   useEffect(() => {
     console.log(`Fetching history for chatId: ${chat_id}`);
@@ -88,7 +88,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
 
       let accumulatedResponse = "";
       const decoder = new TextDecoder();
-      const delay = 10;
+      const delay = 1;
 
       setMessages((prev) =>
         prev.map((message) =>
