@@ -3,6 +3,7 @@ import styles from "./Message.module.css";
 import React from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
 
 interface MessageProps {
   key: number;
@@ -10,12 +11,13 @@ interface MessageProps {
   sender: "user" | "system";
   openFileViewer?: (fileUrl: string, fileName: string) => void;
   isStreaming?: boolean;
+  files?: { name: string; type: string; size: number }[];
 }
 
 function Message(props: Readonly<MessageProps>) {
-  const { textContent, sender, openFileViewer } = props;
-
-  const messageStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
+  const { textContent, sender, openFileViewer, files } = props;
+  const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
+  const messageContainerStyle: string = `${styles.messageContainer} ${sender === "user" ? styles.userMessageContainer : styles.systemMessageContainer}`;
 
   const handleContentClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
@@ -37,10 +39,26 @@ function Message(props: Readonly<MessageProps>) {
   }, [textContent]);
 
   return (
-    <div className={messageStyle} onClick={handleContentClick}>
-      <Text interactable={true}>
-        <span dangerouslySetInnerHTML={{ __html: parsed }} />
-      </Text>
+    <div className={messageContainerStyle}>
+      {files && files.length > 0 && (
+        <div className={styles.attachedFiles}>
+          {files.map((ffile, idx) => (
+            <UploadedFileCard
+              key={idx}
+              fileName={ffile.name}
+              fileType={ffile.type}
+              fileSize={ffile.size}
+              onClose={() => {}}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className={messageBubbleStyle} onClick={handleContentClick}>
+        <Text interactable={true}>
+          <span dangerouslySetInnerHTML={{ __html: parsed }} />
+        </Text>
+      </div>
     </div>
   );
 }

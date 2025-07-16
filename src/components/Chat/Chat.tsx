@@ -16,6 +16,7 @@ interface ChatMessage {
   content: string;
   sender: "user" | "system";
   isStreaming?: boolean;
+  files?: { name: string; type: string; size: number }[];
 }
 
 function Chat({ openFileViewer }: Readonly<ChatProps>) {
@@ -170,11 +171,17 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         id: `user-${Date.now()}`,
         content: currentInput,
         sender: "user",
+        files: uploadedFiles.map((file) => ({
+          name: file.name.split(".").slice(0, -1).join("."),
+          type: file.name.split(".").pop() ?? "",
+          size: file.size,
+        })),
       };
       setMessages((previousMessages: ChatMessage[]) => [
         ...previousMessages,
         newUserMessage,
       ]);
+      setUploadedFiles([]);
       setCurrentInput("");
 
       const systemMessageId = `system-${Date.now()}`;
@@ -284,6 +291,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
             sender={message.sender}
             openFileViewer={handleOpenFileViewer}
             isStreaming={message.isStreaming}
+            files={message.files}
           />
         ))}
 

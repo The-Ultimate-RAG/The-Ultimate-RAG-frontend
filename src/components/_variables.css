@@ -73,7 +73,7 @@
     --border-color-default: #6B7280;
 
     /* Chat button */
-    --focus-color: #dadada;
+    --color-chat-button-hover: #dce1e1 /* Something */
 }
 
 .dark {
@@ -99,5 +99,5 @@
     --border-color-chat: #30363D;
 
     /* Chat button */
-    --focus-color: #30363D;
+    --color-chat-button-hover: #5A5A63 /* Something */
 }

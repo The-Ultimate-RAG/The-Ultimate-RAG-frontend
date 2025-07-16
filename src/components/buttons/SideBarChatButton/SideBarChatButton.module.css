@@ -9,15 +9,14 @@
     display: flex;
     justify-content: center;
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--focus-color);
+    border: 1px solid var(--color-chat-button-hover);
     background-color: transparent;
     transition: all var(--transition-speed-default) var(--bezier-custom);
+    cursor: pointer;
 }
 
 .chatButton:hover {
-    background-color: var(--focus-color);
-    border: 1px solid var(--border-color-default);
-    border-color: var(--focus-color);
+    background-color: var(--color-chat-button-hover);
     transform: translateY(-2px);
 }
 
