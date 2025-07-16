@@ -1,24 +1,22 @@
-/* Message.module.css */
 @import "../_variables.css";
 
-/* New container for the whole message block (files + message) */
 .messageContainer {
     display: flex;
-    flex-direction: column; /* Stack files on top of the message box */
-    gap: var(--spacing-xxs); /* Space between files and message box */
-    width: fit-content; /* Adjust to content width */
-    margin: var(--spacing-huge) var(--spacing-zero); /* Existing vertical margin for messages */
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+    width: fit-content;
+    margin: var(--spacing-huge) var(--spacing-zero);
     max-width: 100%;
 }
 
 .userMessageContainer {
-    margin-left: auto; /* Push user's container to the right */
-    align-items: flex-end; /* Align items (files and message box) to the end */
+    margin-left: auto;
+    align-items: flex-end;
 }
 
 .systemMessageContainer {
-    margin-right: auto; /* Push system's container to the left */
-    align-items: flex-start; /* Align items (files and message box) to the start */
+    margin-right: auto;
+    align-items: flex-start;
     max-width: 100%;
 }
 
@@ -26,10 +24,8 @@
 .messageBox {
     padding: 8px 24px;
     border-radius: 16px;
-    /* Remove width: fit-content here, as it's now handled by the container */
-    /* Remove box-shadow and margin here, as it's now handled by the container if you want them unified */
-    box-shadow: var(--shadow-default); /* Keep if you want shadow on the bubble itself */
-    /* No margin here if the container handles spacing between messages */
+    box-shadow: var(--shadow-default);
+
 }
 
 .userMessageBox {
@@ -37,26 +33,16 @@
     max-width: 70%;
 }
 
-.userMessageBox p {
-    color: var(--text-color-button);
-}
-
 .systemMessageBox {
     color: var(--text-color-button);
     background-color: var(--background-color-primary);
-    /* max-width is now handled by the container for alignment */
-    /* margin-right: auto; is now handled by systemMessageContainer */
-}
-
-.systemMessageBox p {
-    color: var(--text-color-primary);
 }
 
 .attachedFiles {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    flex-wrap: wrap;
     justify-content: flex-end;
 
     width: 100%;
@@ -74,4 +60,12 @@
         height: 0;
         background: transparent;
     }
+}
+
+.markdownContent > :first-child {
+    margin-top: var(--spacing-lg);
+}
+
+.markdownContent > :last-child {
+    margin-bottom: var(--spacing-lg);
 }

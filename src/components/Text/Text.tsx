@@ -44,10 +44,10 @@ function Text(props: Readonly<TextProps>) {
     colorVariant = "default",
     interactable = false,
     onClick,
-    textTransform = "none", // Default textTransform
-    display, // Destructure display
-    className, // Additional class names
-    style, // Additional inline styles
+    textTransform = "none",
+    display,
+    className,
+    style,
     as = "p",
   } = props;
 

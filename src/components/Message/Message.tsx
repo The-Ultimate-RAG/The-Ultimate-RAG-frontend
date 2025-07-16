@@ -1,6 +1,6 @@
 import Text from "../Text/Text";
 import styles from "./Message.module.css";
-import React from "react";
+import React, { useState, useEffect } from "react"; // Import useState and useEffect
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
@@ -19,6 +19,24 @@ function Message(props: Readonly<MessageProps>) {
   const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
   const messageContainerStyle: string = `${styles.messageContainer} ${sender === "user" ? styles.userMessageContainer : styles.systemMessageContainer}`;
 
+  const [sanitizedHtml, setSanitizedHtml] = useState(""); // State to store the sanitized HTML
+
+  useEffect(() => {
+    const parseAndSanitize = async () => {
+      const htmlResult = marked.parse(textContent);
+      let finalHtml: string;
+
+      if (htmlResult instanceof Promise) {
+        finalHtml = await htmlResult;
+      } else {
+        finalHtml = htmlResult;
+      }
+      setSanitizedHtml(DOMPurify.sanitize(finalHtml));
+    };
+
+    parseAndSanitize();
+  }, [textContent]);
+
   const handleContentClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
     if (target.tagName === "A" && target.hasAttribute("href")) {
@@ -33,21 +51,16 @@ function Message(props: Readonly<MessageProps>) {
     }
   };
 
-  const parsed = React.useMemo(() => {
-    const html = marked.parse(textContent);
-    return DOMPurify.sanitize(html);
-  }, [textContent]);
-
   return (
     <div className={messageContainerStyle}>
       {files && files.length > 0 && (
         <div className={styles.attachedFiles}>
-          {files.map((ffile, idx) => (
+          {files.map((file, idx) => (
             <UploadedFileCard
               key={idx}
-              fileName={ffile.name}
-              fileType={ffile.type}
-              fileSize={ffile.size}
+              fileName={file.name}
+              fileType={file.type}
+              fileSize={file.size}
               onClose={() => {}}
             />
           ))}
@@ -55,8 +68,15 @@ function Message(props: Readonly<MessageProps>) {
       )}
 
       <div className={messageBubbleStyle} onClick={handleContentClick}>
-        <Text interactable={true}>
-          <span dangerouslySetInnerHTML={{ __html: parsed }} />
+        <Text
+          as="div"
+          interactable={true}
+          colorVariant={sender === "user" ? "button" : "primary"}
+        >
+          <span
+            className={styles.markdownContent}
+            dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+          />
         </Text>
       </div>
     </div>
