@@ -9,6 +9,7 @@ interface FileViewerPopupProps {
   onClose: () => void;
   fileUrl: string;
   fileName: string;
+  initialPage?: number;
 }
 
 const FileViewerPopup = ({
@@ -16,6 +17,7 @@ const FileViewerPopup = ({
   onClose,
   fileUrl,
   fileName,
+  initialPage = 0,
 }: FileViewerPopupProps) => {
   if (!isOpen) {
     return null;
@@ -34,7 +36,7 @@ const FileViewerPopup = ({
           </Button>
         </header>
         <div className={styles.viewerWrapper}>
-          {fileUrl ? <PdfViewer pdfUrl={fileUrl} /> : <p>No file selected.</p>}
+          {fileUrl ? <PdfViewer pdfUrl={fileUrl} initialPage={initialPage} /> : <p>No file selected.</p>}
         </div>
       </div>
     </>

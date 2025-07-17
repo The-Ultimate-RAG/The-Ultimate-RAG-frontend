@@ -10,7 +10,7 @@ interface MessageProps {
   key: number;
   textContent: string;
   sender: "user" | "system";
-  openFileViewer?: (fileUrl: string, fileName: string) => void;
+  openFileViewer?: (fileUrl: string, fileName: string, page: number) => void;
   isStreaming?: boolean;
   files?: { name: string; type: string; size: number }[];
 }
@@ -22,7 +22,7 @@ function transformCitationsToLinks(text: string): string {
   return text.replace(citationRegex, (match, path, page, lines, start) => {
     const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
     const fileName = path;
-    return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-filename="${fileName}">[Source]</a>`;
+    return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-page="${page}">[Source]</a>`;
   });
 }
 
@@ -55,9 +55,11 @@ function Message(props: Readonly<MessageProps>) {
       event.preventDefault();
       const fileUrl = target.getAttribute("href");
       const fileName = target.textContent ?? "";
+      const page = target.getAttribute("data-page");
+      console.log("File URL:", fileUrl, "Page:", page);
       if (fileUrl) {
         if (openFileViewer) {
-          openFileViewer(fileUrl, fileName);
+          openFileViewer(fileUrl, fileName, parseInt(page));
         }
       }
     }

@@ -5,7 +5,7 @@ import Message from "../Message/Message";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
 import FileViewerPopup from "../files/FileViewerPopup/FileViewerPopup";
 import { useParams } from "react-router-dom";
-import Modal from "../Modal/Modal";
+
 import Text from "../Text/Text";
 
 interface ChatProps {
@@ -32,6 +32,7 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const [isFileViewerOpen, setIsFileViewerOpen] = useState(false);
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
+  const [initialPage, setInitialPage] = useState(1);
   const [isFileRequiredModalOpen, setIsFileRequiredModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -251,9 +252,10 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     );
   };
 
-  const handleOpenFileViewer = (fileUrl: string, fileName: string) => {
+  const handleOpenFileViewer = (fileUrl: string, fileName: string, page: number) => {
     setViewerFileUrl(fileUrl);
     setViewerFileName(fileName);
+    setInitialPage(page)
     setIsFileViewerOpen(true);
   };
 
@@ -328,6 +330,7 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
         onClose={handleCloseFileViewer}
         fileUrl={viewerFileUrl}
         fileName={viewerFileName}
+        initialPage={initialPage}
       />
     </div>
   );
