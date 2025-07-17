@@ -3,6 +3,7 @@ import styles from "./FileViewerPopup.module.css";
 import PdfViewer from "../PdfViewer/PdfViewer";
 import Button from "../../buttons/MainButton/Button";
 import Text from "../../Text/Text";
+import TxtViewer from "../TxtViewer/TxtViewer";
 
 interface FileViewerPopupProps {
   isOpen: boolean;
@@ -36,7 +37,7 @@ const FileViewerPopup = ({
           </Button>
         </header>
         <div className={styles.viewerWrapper}>
-          {fileUrl ? <PdfViewer pdfUrl={fileUrl} initialPage={initialPage} /> : <p>No file selected.</p>}
+          {fileUrl.split(".").at(-1) === "pdf" ? <PdfViewer pdfUrl={fileUrl} initialPage={initialPage} /> : <TxtViewer fileUrl={fileUrl} />}
         </div>
       </div>
     </>
