@@ -14,6 +14,17 @@ interface MessageProps {
   files?: { name: string; type: string; size: number }[];
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+function transformCitationsToLinks(text: string): string {
+  const citationRegex = /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
+  return text.replace(citationRegex, (match, path, page, lines, start) => {
+    const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
+    const fileName = path;
+    return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-filename="${fileName}">[Source]</a>`;
+  });
+}
+
 function Message(props: Readonly<MessageProps>) {
   const { textContent, sender, openFileViewer, files } = props;
   const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
@@ -23,7 +34,7 @@ function Message(props: Readonly<MessageProps>) {
 
   useEffect(() => {
     const parseAndSanitize = async () => {
-      const htmlResult = marked.parse(textContent);
+      const htmlResult = marked.parse(transformCitationsToLinks(textContent));
       let finalHtml: string;
 
       if (htmlResult instanceof Promise) {

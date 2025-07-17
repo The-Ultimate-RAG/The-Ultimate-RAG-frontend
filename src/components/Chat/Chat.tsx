@@ -138,25 +138,7 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         ),
       );
 
-      try {
-        const response = await fetch("/_api/replace_message", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: accumulatedResponse,
-            chatId: chat_id,
-          }),
-        });
-
-        if (!response.ok) {
-          console.error(
-            "Failed to persist assistant message. Status:",
-            response.status,
-          );
-        }
-      } catch (error) {
-        console.error("Error persisting assistant message:", error);
-      }
+      
     },
     [chat_id],
   );
