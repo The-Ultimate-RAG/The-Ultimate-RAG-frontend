@@ -16,7 +16,12 @@ interface ChatGroup {
   chats: ChatButton[];
 }
 
-function Sidebar() {
+interface SidebarProps {
+  activeChatId?: string;
+  activeChatMessages: any[];
+}
+
+function Sidebar(props: Readonly<SidebarProps>) {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const navigate = useNavigate();
   const handleSearchToggle = (expanded: boolean) => {
@@ -25,6 +30,7 @@ function Sidebar() {
 
   const [chats, setChats] = useState<ChatButton[]>([]);
   const baseButtonHeight = "40px";
+  const [activeChatMessages, setActiveChatMessages] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -45,7 +51,19 @@ function Sidebar() {
     fetchChats();
   }, []);
 
+  const isAddChatBlocked =
+    props.activeChatId &&
+    activeChatMessages.length === 0 &&
+    chats.find((chat) => chat.id === props.activeChatId)?.title === "new chat";
+
   const handleAddChat = async () => {
+    if (isAddChatBlocked) {
+      console.log(
+        "Adding new chat is blocked because the current chat is empty.",
+      );
+      return;
+    }
+
     const response = await fetch("/_api/new_chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -65,7 +83,6 @@ function Sidebar() {
 
   const handleSearchSubmit = (query: string) => {
     console.log("Поисковый запрос:", query);
-    // Добавьте здесь вашу логику поиска
   };
 
   return (
@@ -81,6 +98,7 @@ function Sidebar() {
             width="100%"
             borderRadius="round"
             onClick={handleAddChat}
+            isDisabled={isAddChatBlocked}
           >
             + Add chat
           </Button>
@@ -99,6 +117,7 @@ function Sidebar() {
             key={chat.id}
             chatId={chat.id}
             title={chat.title}
+            isActive={chat.id === props.activeChatId}
           />
         ))}
       </div>

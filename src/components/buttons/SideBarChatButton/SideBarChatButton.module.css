@@ -15,12 +15,19 @@
     cursor: pointer;
 }
 
-.chatButton:hover {
+
+.inactive:hover {
     background-color: var(--color-chat-button-hover);
     transform: translateY(-2px);
 }
 
-.chatButton:active {
+.inactive:active {
     background-color: var(--color-primary-hover);
     transform: translateY(0px);
 }
+
+.active {
+    background-color: var(--color-primary);
+    cursor: default;
+}
+

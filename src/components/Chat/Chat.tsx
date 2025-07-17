@@ -4,11 +4,15 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Message from "../Message/Message";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
 import FileViewerPopup from "../files/FileViewerPopup/FileViewerPopup";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import Text from "../Text/Text";
 
 interface ChatProps {
   width?: number;
   openFileViewer?: (fileUrl: string, fileName: string) => void;
+  messages: ChatMessage[];
+  setMessages: React.Dispatch<React.SetStateAction<ChatMessage[]>>;
 }
 
 interface ChatMessage {
@@ -19,8 +23,7 @@ interface ChatMessage {
   files?: { name: string; type: string; size: number }[];
 }
 
-function Chat({ openFileViewer }: Readonly<ChatProps>) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const [currentInput, setCurrentInput] = useState<string>("");
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const { chatId: chat_id } = useParams();
@@ -29,51 +32,29 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
   const [isFileViewerOpen, setIsFileViewerOpen] = useState(false);
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    if (chat_id) {
-      const fetchChatHistory = async () => {
-        try {
-          const response = await fetch(`/_api/chats/${chat_id}`, { signal });
-
-          if (response.ok) {
-            const data = await response.json();
-            setMessages(Array.isArray(data.messages) ? data.messages : []);
-          } else if (response.status === 404) {
-            console.error(`Chat with ID ${chat_id} not found.`);
-            setMessages([]);
-          } else {
-            console.error(`Fetch failed with status: ${response.status}`);
-          }
-        } catch (error) {
-          if (error.name === "AbortError") {
-            console.log("Fetch aborted");
-          } else {
-            console.error("An unexpected error occurred during fetch:", error);
-            setMessages([]);
-          }
-        }
-      };
-      fetchChatHistory();
-    } else {
-      setMessages([]);
-    }
-
-    return () => {
-      controller.abort();
-    };
-  }, [chat_id]);
+  const [isFileRequiredModalOpen, setIsFileRequiredModalOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [messages.length]);
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const processStream = useCallback(
     async (response: Response, systemMessageId: string) => {
@@ -133,9 +114,27 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
         ),
       );
 
-      
+      try {
+        const response = await fetch("/_api/replace_message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: accumulatedResponse,
+            chatId: chat_id,
+          }),
+        });
+
+        if (!response.ok) {
+          console.error(
+            "Failed to persist assistant message. Status:",
+            response.status,
+          );
+        }
+      } catch (error) {
+        console.error("Error persisting assistant message:", error);
+      }
     },
-    [chat_id],
+    [chat_id, setMessages],
   );
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +142,13 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
   };
 
   const handleSendMessage = async () => {
+    if (messages.length === 0 && uploadedFiles.length === 0) {
+      setError("A file attachment is required to start a new chat.");
+      return;
+    }
+
     if (currentInput.trim() !== "" || uploadedFiles.length > 0) {
+      setError(null);
       const newUserMessage: ChatMessage = {
         id: `user-${Date.now()}`,
         content: currentInput,
@@ -258,6 +263,15 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
     setViewerFileName("");
   };
 
+  const handleCloseError = () => {
+    setError(null);
+  };
+
+  const inputLabel =
+    messages.length === 0
+      ? "Please upload a document to start the chat"
+      : "Enter your question";
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
@@ -276,6 +290,15 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
       </div>
 
       <div className={styles.inputArea}>
+        {error && (
+          <div className={styles.errorPopup}>
+            <Text className={styles.errorMessage}>{error}</Text>
+            <button onClick={handleCloseError} className={styles.closeButton}>
+              &times;
+            </button>
+          </div>
+        )}
+
         {uploadedFiles.length > 0 && (
           <div className={styles.uploadedFilesContainer}>
             {" "}
@@ -292,10 +315,10 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
           </div>
         )}
         <TextInput
-          label={"Enter your question"}
+          label={inputLabel}
           value={currentInput}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+          onChange={(e) => setCurrentInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           onFileChange={handleFileChange}
         />
       </div>

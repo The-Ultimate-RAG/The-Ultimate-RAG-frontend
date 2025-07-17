@@ -76,3 +76,7 @@
     word-break: break-word; /* Newer, more powerful breaking algorithm */
     hyphens: auto;
 }
+
+.markdownContent pre {
+    width: 10px;
+}

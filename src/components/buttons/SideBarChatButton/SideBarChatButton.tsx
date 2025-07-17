@@ -6,37 +6,24 @@ import Text from "../../Text/Text";
 interface ChatButtonProps {
   title: string;
   chatId: string;
+  isActive: boolean;
 }
 
 function SideBarChatButton(props: Readonly<ChatButtonProps>) {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
     navigate(`/chats/${props.chatId}`);
   };
 
-  const handleMouseDown = () => {
-    setIsActive(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsActive(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsActive(false);
-  };
-
   return (
     <button
-      className={styles.chatButton}
+      className={`${styles.chatButton} ${props.isActive ? styles.active : styles.inactive}`}
       onClick={handleClick}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
     >
-      <Text colorVariant={isActive ? "button" : "primary"}>{props.title}</Text>
+      <Text colorVariant={props.isActive ? "button" : "primary"}>
+        {props.title}
+      </Text>
     </button>
   );
 }
