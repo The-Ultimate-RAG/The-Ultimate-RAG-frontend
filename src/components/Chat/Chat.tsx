@@ -24,53 +24,48 @@ function Chat({ openFileViewer }: Readonly<ChatProps>) {
   const [currentInput, setCurrentInput] = useState<string>("");
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const { chatId: chat_id } = useParams();
-  const navigate = useNavigate();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [isFileViewerOpen, setIsFileViewerOpen] = useState(false);
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
 
-  // useEffect(() => {
-  //   if (!chat_id) {
-  //     const createNewChat = async () => {
-  //       try {
-  //         const response = await fetch("/new_chat", { method: "POST" });
-  //         if (response.ok) {
-  //           const data = await response.json();
-  //           navigate(`/chats/${data.chat_id}`, { replace: true });
-  //         }
-  //       } catch (error) {
-  //         console.error("Failed to create a new chat:", error);
-  //       }
-  //     };
-  //     createNewChat();
-  //   }
-  // }, [chat_id, navigate]);
-
   useEffect(() => {
-    console.log(`Fetching history for chatId: ${chat_id}`);
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     if (chat_id) {
       const fetchChatHistory = async () => {
         try {
-          const response = await fetch(`/_api/chats/${chat_id}`);
+          const response = await fetch(`/_api/chats/${chat_id}`, { signal });
+
           if (response.ok) {
             const data = await response.json();
-            console.log(`Fetched messages for ${chat_id}:`, data.messages);
             setMessages(Array.isArray(data.messages) ? data.messages : []);
           } else if (response.status === 404) {
             console.error(`Chat with ID ${chat_id} not found.`);
+            setMessages([]);
           } else {
             console.error(`Fetch failed with status: ${response.status}`);
           }
         } catch (error) {
-          console.error("An unexpected error occurred during fetch:", error);
-          setMessages([]);
+          if (error.name === "AbortError") {
+            console.log("Fetch aborted");
+          } else {
+            console.error("An unexpected error occurred during fetch:", error);
+            setMessages([]);
+          }
         }
       };
       fetchChatHistory();
+    } else {
+      setMessages([]);
     }
-  }, [chat_id, navigate]);
+
+    return () => {
+      controller.abort();
+    };
+  }, [chat_id]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

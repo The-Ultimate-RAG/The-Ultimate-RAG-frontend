@@ -1,9 +1,10 @@
 import Text from "../Text/Text";
 import styles from "./Message.module.css";
-import React, { useState, useEffect } from "react"; // Import useState and useEffect
+import React, { useState, useEffect, useRef } from "react"; // Import useState and useEffect
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
+import debounce from "../../utils/debounce";
 
 interface MessageProps {
   key: number;
@@ -15,7 +16,7 @@ interface MessageProps {
 }
 
 function Message(props: Readonly<MessageProps>) {
-  const { textContent, sender, openFileViewer, files } = props;
+  const { textContent, sender, openFileViewer, files, isStreaming } = props;
   const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
   const messageContainerStyle: string = `${styles.messageContainer} ${sender === "user" ? styles.userMessageContainer : styles.systemMessageContainer}`;
 

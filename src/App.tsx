@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import Messenger from "./pages/Messenger/Messenger";
+import InitialRedirectHandler from "./components/InitialRedirectHandler/InitialRedirectHandler";
 
 function App() {
   const theme = localStorage.getItem("theme") ?? "light";
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <Router>
+      <InitialRedirectHandler />
       <div
         style={{
           position: "absolute",

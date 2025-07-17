@@ -69,3 +69,10 @@
 .markdownContent > :last-child {
     margin-bottom: var(--spacing-lg);
 }
+
+.markdownContent {
+    line-height: 1.8;
+    word-wrap: break-word; /* Older browsers, generally still good to include */
+    word-break: break-word; /* Newer, more powerful breaking algorithm */
+    hyphens: auto;
+}
