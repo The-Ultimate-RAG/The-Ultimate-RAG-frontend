@@ -1,10 +1,13 @@
+// Sidebar.tsx
 import SideBarChatButton from "../buttons/SideBarChatButton/SideBarChatButton";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "../buttons/MainButton/Button";
 import styles from "./SideBar.module.css";
 import SearchButton from "../buttons/SearchButton/SearchButton";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { useNavigate } from "react-router-dom";
+import { Chat } from "../Icons/Chat";
+import Text from "../Text/Text";
 
 interface ChatButton {
   id: string;
@@ -30,59 +33,47 @@ function Sidebar(props: Readonly<SidebarProps>) {
 
   const [chats, setChats] = useState<ChatButton[]>([]);
   const baseButtonHeight = "40px";
-  const [activeChatMessages, setActiveChatMessages] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchChats = async () => {
-      const response = await fetch("/_api/list_chats");
-      if (!response.ok) {
-        throw new Error(`Error, status: ${response.status}`);
-      }
-      const data = await response.json();
-      if (data.chats) {
-        const allChats: ChatButton[] = [];
-        data.chats.forEach((group: ChatGroup) => {
-          allChats.push(...group.chats);
-        });
-        setChats(allChats);
-      }
-    };
-
-    fetchChats();
-  }, []);
 
   const isAddChatBlocked =
     props.activeChatId &&
-    activeChatMessages.length === 0 &&
+    props.activeChatMessages.length === 0 &&
     chats.find((chat) => chat.id === props.activeChatId)?.title === "new chat";
 
-  const handleAddChat = async () => {
-    if (isAddChatBlocked) {
-      console.log(
-        "Adding new chat is blocked because the current chat is empty.",
-      );
-      return;
+  const loadChats = useCallback(async () => {
+    try {
+      const res = await fetch("/_api/list_chats");
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      const flat: ChatButton[] = [];
+      data.chats?.forEach((g: ChatGroup) => flat.push(...g.chats));
+      setChats(flat);
+    } catch (e) {
+      console.error("Failed to load chats", e);
     }
+  }, []);
 
-    const response = await fetch("/_api/new_chat", {
+  useEffect(() => {
+    loadChats();
+  }, [loadChats]);
+
+  const handleAddChat = async () => {
+    if (isAddChatBlocked) return;
+
+    const res = await fetch("/_api/new_chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: "New chat" }),
     });
 
-    if (!response.ok) {
-      console.error(`New chat failed: ${response.status}`);
+    if (!res.ok) {
+      console.error("new_chat failed", res.status);
       return;
     }
-    const newChat = await response.json(); // e.g., { id: '...', title: 'New chat' }
 
-    setChats((prevChats) => [newChat, ...prevChats]);
+    await loadChats();
 
+    const newChat = await res.json();
     navigate(`/chats/${newChat.id}`);
-  };
-
-  const handleSearchSubmit = (query: string) => {
-    console.log("Поисковый запрос:", query);
   };
 
   return (
@@ -105,21 +96,55 @@ function Sidebar(props: Readonly<SidebarProps>) {
         </div>
         <nav className={styles.searchButton}>
           <SearchButton
-            onSearch={handleSearchSubmit}
             onToggleExpand={handleSearchToggle}
             initialSize={baseButtonHeight}
           />
         </nav>
       </div>
       <div className={styles.chatsContainer}>
-        {chats.map((chat) => (
-          <SideBarChatButton
-            key={chat.id}
-            chatId={chat.id}
-            title={chat.title}
-            isActive={chat.id === props.activeChatId}
-          />
-        ))}
+        {chats.length === 0 ? (
+          <div className={styles.noChatsPlaceholder}>
+            <p className={styles.noChatsIcon}>
+              <Chat />
+            </p>
+            <Text
+              className={styles.noChatsTitle}
+              fontSize={"huge"}
+              fontWeight={"bold"}
+            >
+              No chats yet
+            </Text>
+            <Text
+              className={styles.noChatsDescriptionLine}
+              fontWeight={"regular"}
+            >
+              Click to “+ Add new chat”
+            </Text>
+            <Text
+              className={styles.noChatsDescriptionLine}
+              fontWeight={"regular"}
+            >
+              to add a conversation
+            </Text>
+
+            <hr className={styles.horizontalLine} />
+            <SideBarChatButton
+              title={"No recent conversations"}
+              chatId={"none"}
+              isActive={false}
+              className={styles.noRecentConversations}
+            />
+          </div>
+        ) : (
+          chats.map((chat) => (
+            <SideBarChatButton
+              key={chat.id}
+              chatId={chat.id}
+              title={chat.title}
+              isActive={chat.id === props.activeChatId}
+            />
+          ))
+        )}
       </div>
 
       <div className={styles.themeSwitcher}>

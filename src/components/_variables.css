@@ -64,6 +64,7 @@
 
     /* Background colors */
     --background-color-primary: #FFFFFF;
+    --sidebar-background-color: #FFFFFF;
     --background-surface-secondary: #F8F6F1;
     --background-input-default: #E0E0E0;
     --input-focused-background-color: var(--background-color-primary);
@@ -90,9 +91,10 @@
 
     /* Background colors */
     --background-color-primary: #44444C;
+    --sidebar-background-color: #1F2937;
     --background-surface-secondary: #111827;
     --input-focused-background-color: var(--background-color-primary);
-    --background-input-default: #374151;
+    --background-input-default: #242428;
 
     --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.2);
     --border-color-default: #A9B0BF;

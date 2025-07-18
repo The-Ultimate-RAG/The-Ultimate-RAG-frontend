@@ -22,7 +22,8 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^10.1.0",
     "react-pdf-viewer": "^0.1.0",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "rehype-raw": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
