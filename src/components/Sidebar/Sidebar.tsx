@@ -131,7 +131,7 @@ function Sidebar(props: Readonly<SidebarProps>) {
             <SideBarChatButton
               title={"No recent conversations"}
               chatId={"none"}
-              isActive={false}
+              isActive={true}
               className={styles.noRecentConversations}
             />
           </div>

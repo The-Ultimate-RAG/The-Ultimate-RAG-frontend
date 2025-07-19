@@ -21,7 +21,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
     <button
       className={`${styles.chatButton} ${props.isActive ? styles.active : styles.inactive} ${props.className}`}
       onClick={handleClick}
-      disabled={!props.isActive}
+      disabled={props.isActive}
     >
       <Text colorVariant={props.isActive ? "button" : "primary"}>
         {props.title}

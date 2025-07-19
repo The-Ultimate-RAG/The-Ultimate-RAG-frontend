@@ -18,7 +18,7 @@ type TextTransform = "none" | "capitalize" | "uppercase" | "lowercase";
 type DisplayType = "inline" | "block" | "inline-block";
 
 type FontWeight = "regular" | "bold";
-type FontSize = "small" | "medium" | "large" | "huge";
+type FontSize = "small" | "medium" | "large" | "huge" | "hugest";
 type ColorVariant = "default" | "primary" | "secondary" | "button" | "hover";
 
 interface TextProps {
@@ -58,6 +58,7 @@ function Text(props: Readonly<TextProps>) {
     medium: styles.fontSizeMedium,
     large: styles.fontSizeLarge,
     huge: styles.fontSizeHuge,
+    hugest: styles.fontSizeHugest,
   }[fontSize];
 
   const colorClass = {

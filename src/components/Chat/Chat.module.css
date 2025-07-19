@@ -123,3 +123,23 @@ body {
     transform: translateY(0);
   }
 }
+
+.chatPlaceholder {
+  text-align: center;
+  color: var(--text-color-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.chatPlaceholderTitle {
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.chatPlaceholderDescription {
+    margin-top: 0;
+}

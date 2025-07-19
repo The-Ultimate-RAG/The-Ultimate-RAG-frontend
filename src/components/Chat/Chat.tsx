@@ -137,10 +137,6 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     [chat_id, setMessages],
   );
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentInput(event.currentTarget.value);
-  };
-
   const handleSendMessage = async () => {
     if (messages.length === 0 && uploadedFiles.length === 0) {
       setError("A file attachment is required to start a new chat.");
@@ -267,23 +263,44 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   };
 
   const inputLabel =
-    messages.length === 0
+    messages.length === 0 && uploadedFiles.length === 0
       ? "Please upload a document to start the chat"
       : "Enter your question";
 
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
-        {messages.map((message) => (
-          <Message
-            key={message.id}
-            textContent={message.content}
-            sender={message.sender}
-            openFileViewer={handleOpenFileViewer}
-            isStreaming={message.isStreaming}
-            files={message.files}
-          />
-        ))}
+        {messages.length === 0 ? (
+          <div className={styles.chatPlaceholder}>
+            <Text
+              className={styles.chatPlaceholderTitle}
+              fontWeight={"bold"}
+              fontSize={"hugest"}
+              colorVariant={"hover"}
+            >
+              The Ultimate RAG
+            </Text>
+            <Text
+              className={styles.chatPlaceholderDescription}
+              fontSize={"large"}
+              fontWeight={"regular"}
+              colorVariant={"secondary"}
+            >
+              ask anything...
+            </Text>
+          </div>
+        ) : (
+          messages.map((message) => (
+            <Message
+              key={message.id}
+              textContent={message.content}
+              sender={message.sender}
+              openFileViewer={handleOpenFileViewer}
+              isStreaming={message.isStreaming}
+              files={message.files}
+            />
+          ))
+        )}
 
         <div ref={messagesEndRef} />
       </div>
