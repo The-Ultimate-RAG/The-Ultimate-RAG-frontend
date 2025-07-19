@@ -40,7 +40,7 @@ function Messenger() {
       };
       fetchChatHistory();
     } else {
-      setMessages([]); // Clear messages if there's no chat ID
+      setMessages([]);
     }
 
     return () => {
@@ -51,11 +51,9 @@ function Messenger() {
   return (
     <div className={styles.messenger}>
       <aside className={styles.sidebar}>
-        {/* Pass the messages state to the Sidebar */}
         <Sidebar activeChatId={chatId} activeChatMessages={messages} />
       </aside>
       <div className={styles.chatContainer}>
-        {/* Pass messages and the state setter to the Chat */}
         <Chat
           key={chatId ?? "default"}
           messages={messages}

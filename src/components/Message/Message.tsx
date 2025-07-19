@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from "react"; // Import useState a
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
-import debounce from "../../utils/debounce";
 
 interface MessageProps {
   key: number;
@@ -18,7 +17,8 @@ interface MessageProps {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function transformCitationsToLinks(text: string): string {
-  const citationRegex = /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
+  const citationRegex =
+    /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
   return text.replace(citationRegex, (match, path, page, lines, start) => {
     const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
     console.log("File URL:", fileUrl, "Page:", page, "Lines:", lines, "Start:", start);
@@ -31,7 +31,7 @@ function Message(props: Readonly<MessageProps>) {
   const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
   const messageContainerStyle: string = `${styles.messageContainer} ${sender === "user" ? styles.userMessageContainer : styles.systemMessageContainer}`;
 
-  const [sanitizedHtml, setSanitizedHtml] = useState(""); // State to store the sanitized HTML
+  const [sanitizedHtml, setSanitizedHtml] = useState("");
 
   useEffect(() => {
     const parseAndSanitize = async () => {

@@ -35,7 +35,6 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const [initialPage, setInitialPage] = useState(1);
   const [initialLines, setInitialLines] = useState("");
   const [start, setStart] = useState("");
-  const [isFileRequiredModalOpen, setIsFileRequiredModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const scrollToBottom = () => {
@@ -68,7 +67,7 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
 
       let accumulatedResponse = "";
       const decoder = new TextDecoder();
-      const delay = 1;
+      const delay = 3;
 
       setMessages((prev) =>
         prev.map((message) =>
@@ -228,12 +227,6 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      handleSendMessage();
-    }
-  };
-
   const handleFileChange = (files: File[] | null) => {
     if (files && files.length > 0) {
       setUploadedFiles((prevFiles) => {
@@ -254,10 +247,14 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     );
   };
 
-  const handleOpenFileViewer = (fileUrl: string, fileName: string, page: number, lines: string, start: string) => {
+  const handleOpenFileViewer = (
+    fileUrl: string,
+    fileName: string,
+    page: number, lines: string, start: string,
+  ) => {
     setViewerFileUrl(fileUrl);
     setViewerFileName(fileName);
-    setInitialPage(page)
+    setInitialPage(page);
     setIsFileViewerOpen(true);
     setInitialLines(lines);
     setStart(start);

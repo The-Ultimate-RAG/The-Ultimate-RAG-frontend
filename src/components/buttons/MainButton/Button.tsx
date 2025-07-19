@@ -11,7 +11,6 @@ interface ButtonProps {
   height?: string;
   borderRadius?: "default" | "round";
   className?: string;
-  isDisabled?: boolean | "";
 }
 
 function Button(props: Readonly<ButtonProps>) {
@@ -23,7 +22,6 @@ function Button(props: Readonly<ButtonProps>) {
     onClick,
     height,
     borderRadius = "default",
-    isDisabled = false,
   } = props;
 
   const inlineStyles: React.CSSProperties = {
