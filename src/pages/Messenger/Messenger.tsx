@@ -49,7 +49,7 @@ function Messenger() {
   }, [chatId]); // This effect re-runs when the chat ID changes
 
   return (
-    <body className={styles.messenger}>
+    <div className={styles.messenger}>
       <aside className={styles.sidebar}>
         {/* Pass the messages state to the Sidebar */}
         <Sidebar activeChatId={chatId} activeChatMessages={messages} />
@@ -62,7 +62,7 @@ function Messenger() {
           setMessages={setMessages}
         />
       </div>
-    </body>
+    </div>
   );
 }
 

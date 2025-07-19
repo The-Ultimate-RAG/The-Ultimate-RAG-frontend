@@ -33,6 +33,8 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
   const [initialPage, setInitialPage] = useState(1);
+  const [initialLines, setInitialLines] = useState("");
+  const [start, setStart] = useState("");
   const [isFileRequiredModalOpen, setIsFileRequiredModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -252,11 +254,13 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     );
   };
 
-  const handleOpenFileViewer = (fileUrl: string, fileName: string, page: number) => {
+  const handleOpenFileViewer = (fileUrl: string, fileName: string, page: number, lines: string, start: string) => {
     setViewerFileUrl(fileUrl);
     setViewerFileName(fileName);
     setInitialPage(page)
     setIsFileViewerOpen(true);
+    setInitialLines(lines);
+    setStart(start);
   };
 
   const handleCloseFileViewer = () => {
@@ -331,6 +335,8 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
         fileUrl={viewerFileUrl}
         fileName={viewerFileName}
         initialPage={initialPage}
+        initialLines={initialLines}
+        start={start}
       />
     </div>
   );

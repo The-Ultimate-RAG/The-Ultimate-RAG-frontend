@@ -89,7 +89,7 @@ function SearchButton(props: Readonly<SearchButtonProps>) {
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <button type="submit" className={styles.submitButton}>
+          <button title="Search" type="submit" className={styles.submitButton}>
             <LookUp className={styles.iconInInput} />
           </button>
         </form>

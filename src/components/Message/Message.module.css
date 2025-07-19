@@ -72,11 +72,18 @@
 
 .markdownContent {
     line-height: 1.8;
-    word-wrap: break-word; /* Older browsers, generally still good to include */
-    word-break: break-word; /* Newer, more powerful breaking algorithm */
+    word-wrap: break-word;
+    word-break: break-word;
     hyphens: auto;
 }
 
-.markdownContent pre {
-    width: 10px;
+.markdownContent code {
+    max-width: 100%;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,0.05);
+    border-radius: 6px;
+    white-space: pre-wrap;
+    word-break: break-all;
 }

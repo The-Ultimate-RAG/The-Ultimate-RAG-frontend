@@ -14,7 +14,7 @@ function App() {
 
   return (
     <Router>
-      <InitialRedirectHandler />
+      
       <div
         style={{
           position: "absolute",
