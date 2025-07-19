@@ -9,7 +9,7 @@ interface MessageProps {
   key: number;
   textContent: string;
   sender: "user" | "system";
-  openFileViewer?: (fileUrl: string, fileName: string, page: number) => void;
+  openFileViewer?: (fileUrl: string, fileName: string, page: number, lines: string, start: string) => void;
   isStreaming?: boolean;
   files?: { name: string; type: string; size: number }[];
 }
@@ -21,8 +21,8 @@ function transformCitationsToLinks(text: string): string {
     /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
   return text.replace(citationRegex, (match, path, page, lines, start) => {
     const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
-    const fileName = path;
-    return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-page="${page}">[Source]</a>`;
+    console.log("File URL:", fileUrl, "Page:", page, "Lines:", lines, "Start:", start);
+    return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-page="${page}" data-lines="${lines}" data-start="${start}">[Source]</a>`;
   });
 }
 
@@ -56,10 +56,12 @@ function Message(props: Readonly<MessageProps>) {
       const fileUrl = target.getAttribute("href");
       const fileName = target.textContent ?? "";
       const page = target.getAttribute("data-page");
+      const lines = target.getAttribute("data-lines");
+      const start = target.getAttribute("data-start");
       console.log("File URL:", fileUrl, "Page:", page);
       if (fileUrl) {
         if (openFileViewer) {
-          openFileViewer(fileUrl, fileName, parseInt(page));
+          openFileViewer(fileUrl, fileName, parseInt(page), lines, start);
         }
       }
     }
