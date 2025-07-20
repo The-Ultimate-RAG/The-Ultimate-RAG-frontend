@@ -1,9 +1,13 @@
 import { marked } from 'marked';
 import React, { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
+import styles from "./TxtViewer.module.css";
 
 interface TxtPreviewProps {
   fileUrl: string;
+  initialPage?: number;
+  initialLines?: string;
+  start?: string;
 }
 
 const TxtViewer: React.FC<TxtPreviewProps> = (props) => {
@@ -15,7 +19,7 @@ const TxtViewer: React.FC<TxtPreviewProps> = (props) => {
   useEffect(() => {
     const fetchHtml = async () => {
       try {
-        const response = await fetch(`${fileUrl}`);
+        const response = await fetch(`${fileUrl}`, {page: props.initialPage, lines: props.initialLines, start: props.start});
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -40,7 +44,7 @@ const TxtViewer: React.FC<TxtPreviewProps> = (props) => {
   }
 
   return (
-    <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+    <div className={styles.textContainer} dangerouslySetInnerHTML={{ __html: htmlContent }} />
   );
 };
 

@@ -11,6 +11,8 @@ interface FileViewerPopupProps {
   fileUrl: string;
   fileName: string;
   initialPage?: number;
+  initialLines?: string;
+  start?: string;
 }
 
 const FileViewerPopup = ({
@@ -19,6 +21,8 @@ const FileViewerPopup = ({
   fileUrl,
   fileName,
   initialPage = 0,
+  initialLines = "",
+  start = "",
 }: FileViewerPopupProps) => {
   if (!isOpen) {
     return null;
@@ -37,7 +41,7 @@ const FileViewerPopup = ({
           </Button>
         </header>
         <div className={styles.viewerWrapper}>
-          {fileUrl.split(".").at(-1) === "pdf" ? <PdfViewer pdfUrl={fileUrl} initialPage={initialPage} /> : <TxtViewer fileUrl={fileUrl} />}
+          {fileUrl.split(".").at(-1) === "pdf" ? <PdfViewer pdfUrl={fileUrl} initialPage={initialPage} /> : <TxtViewer fileUrl={fileUrl} initialPage={initialPage} initialLines={initialLines} start={start}/>}
         </div>
       </div>
     </>

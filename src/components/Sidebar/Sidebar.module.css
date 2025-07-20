@@ -86,14 +86,14 @@
 .noChatsIcon {
     font-size: 48px;
     margin-bottom: 0;
-    color: var(--text-color-primary);
+    color: var(--text-color-secondary);
 }
 
 .noChatsTitle {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
-    color: #A9A9B1;
+    color: var(--text-color-secondary);
 }
 
 .noChatsDescriptionLine {
@@ -117,6 +117,7 @@
     margin-top: var(--spacing-xs);
     width: 100%;
     transition: none;
+    background-color: transparent;
 }
 
 .noRecentConversations:hover {
@@ -131,6 +132,6 @@
 }
 
 .noRecentConversations p {
-    color: #A9A9B1;
+    color: var(--text-color-secondary);
 }
 

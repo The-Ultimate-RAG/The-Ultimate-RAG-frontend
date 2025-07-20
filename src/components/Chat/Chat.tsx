@@ -33,6 +33,8 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const [viewerFileUrl, setViewerFileUrl] = useState("");
   const [viewerFileName, setViewerFileName] = useState("");
   const [initialPage, setInitialPage] = useState(1);
+  const [initialLines, setInitialLines] = useState("");
+  const [start, setStart] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const scrollToBottom = () => {
@@ -136,10 +138,6 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
     },
     [chat_id, setMessages],
   );
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentInput(event.currentTarget.value);
-  };
 
   const handleSendMessage = async () => {
     if (messages.length === 0 && uploadedFiles.length === 0) {
@@ -248,12 +246,14 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   const handleOpenFileViewer = (
     fileUrl: string,
     fileName: string,
-    page: number,
+    page: number, lines: string, start: string,
   ) => {
     setViewerFileUrl(fileUrl);
     setViewerFileName(fileName);
     setInitialPage(page);
     setIsFileViewerOpen(true);
+    setInitialLines(lines);
+    setStart(start);
   };
 
   const handleCloseFileViewer = () => {
@@ -267,23 +267,44 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
   };
 
   const inputLabel =
-    messages.length === 0
+    messages.length === 0 && uploadedFiles.length === 0
       ? "Please upload a document to start the chat"
       : "Enter your question";
 
   return (
     <div className={styles.chatContainer}>
       <div className={styles.messageDisplay}>
-        {messages.map((message) => (
-          <Message
-            key={message.id}
-            textContent={message.content}
-            sender={message.sender}
-            openFileViewer={handleOpenFileViewer}
-            isStreaming={message.isStreaming}
-            files={message.files}
-          />
-        ))}
+        {messages.length === 0 ? (
+          <div className={styles.chatPlaceholder}>
+            <Text
+              className={styles.chatPlaceholderTitle}
+              fontWeight={"bold"}
+              fontSize={"hugest"}
+              colorVariant={"hover"}
+            >
+              The Ultimate RAG
+            </Text>
+            <Text
+              className={styles.chatPlaceholderDescription}
+              fontSize={"large"}
+              fontWeight={"regular"}
+              colorVariant={"secondary"}
+            >
+              ask anything...
+            </Text>
+          </div>
+        ) : (
+          messages.map((message) => (
+            <Message
+              key={message.id}
+              textContent={message.content}
+              sender={message.sender}
+              openFileViewer={handleOpenFileViewer}
+              isStreaming={message.isStreaming}
+              files={message.files}
+            />
+          ))
+        )}
 
         <div ref={messagesEndRef} />
       </div>
@@ -328,6 +349,8 @@ function Chat({ messages, setMessages }: Readonly<ChatProps>) {
         fileUrl={viewerFileUrl}
         fileName={viewerFileName}
         initialPage={initialPage}
+        initialLines={initialLines}
+        start={start}
       />
     </div>
   );
