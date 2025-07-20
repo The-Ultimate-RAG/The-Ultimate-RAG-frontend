@@ -32,8 +32,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git checkout -b hf2-single-commit
-          git rm -r --cached .
           git add .
-          git commit -m "Single commit for HF2"
+          git commit -m "Single commit for HF2" || true
           git remote add hf2 https://huggingface.co/spaces/The-Ultimate-RAG-HF/frontend
           git push --force hf2 hf2-single-commit:main
