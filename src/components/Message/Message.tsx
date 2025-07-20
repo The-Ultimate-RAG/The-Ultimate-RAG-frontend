@@ -26,7 +26,8 @@ function transformCitationsToLinks(text: string): string {
   const citationRegex =
     /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
   return text.replace(citationRegex, (match, path, page, lines, start) => {
-    const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
+    // const fileUrl = `https://the-ultimate-rag-hf-rag-integration-test.hf.space`+`\\viewer\\${path}`;
+    const fileUrl = `https://PopovDanil-backend.hf.space`+`\\viewer\\${path}`;
     console.log(
       "File URL:",
       fileUrl,
@@ -74,11 +75,12 @@ function Message(props: Readonly<MessageProps>) {
       const lines = target.getAttribute("data-lines");
       const start = target.getAttribute("data-start");
       console.log("File URL:", fileUrl, "Page:", page);
-      if (fileUrl && page && lines && start) {
-        if (openFileViewer) {
-          openFileViewer(fileUrl, fileName, parseInt(page), lines, start);
-        }
+
+      if (openFileViewer) {
+        openFileViewer(fileUrl ? fileUrl : '', fileName, parseInt(page ? page : "1"), lines ? lines : '1-1', start ? start : '');
+        console.log('Opening file preview:', fileUrl)
       }
+
     }
   };
 

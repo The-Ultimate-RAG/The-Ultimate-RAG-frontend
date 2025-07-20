@@ -6,7 +6,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/_api": {
-        target: import.meta.env.VITE_API_URL, // Fallback if env variable is not  set
+        target: "https://PopovDanil-backend.hf.space", // Fallback if env variable is not  set
+        // target: "https://the-ultimate-rag-hf-rag-integration-test.hf.space", // Fallback if env variable is not  set
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/_api/, ""),
       },
