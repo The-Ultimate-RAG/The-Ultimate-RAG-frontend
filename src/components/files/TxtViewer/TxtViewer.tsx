@@ -1,6 +1,5 @@
-import { marked } from 'marked';
-import React, { useState, useEffect } from 'react';
-import DOMPurify from 'dompurify';
+import React, { useState, useEffect } from "react";
+import DOMPurify from "dompurify";
 import styles from "./TxtViewer.module.css";
 
 interface TxtPreviewProps {
@@ -11,15 +10,26 @@ interface TxtPreviewProps {
 }
 
 const TxtViewer: React.FC<TxtPreviewProps> = (props) => {
-    const { fileUrl } = props;
-  const [htmlContent, setHtmlContent] = useState<string>('');
+  const { fileUrl, initialPage, initialLines, start } = props;
+  const [htmlContent, setHtmlContent] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchHtml = async () => {
       try {
-        const response = await fetch(`${fileUrl}`, {page: props.initialPage, lines: props.initialLines, start: props.start});
+        const url = new URL(fileUrl);
+        if (initialPage !== undefined) {
+          url.searchParams.append("page", initialPage.toString());
+        }
+        if (initialLines !== undefined) {
+          url.searchParams.append("lines", initialLines);
+        }
+        if (start !== undefined) {
+          url.searchParams.append("start", start);
+        }
+
+        const response = await fetch(url.toString());
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -44,7 +54,10 @@ const TxtViewer: React.FC<TxtPreviewProps> = (props) => {
   }
 
   return (
-    <div className={styles.textContainer} dangerouslySetInnerHTML={{ __html: htmlContent }} />
+    <div
+      className={styles.textContainer}
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
   );
 };
 

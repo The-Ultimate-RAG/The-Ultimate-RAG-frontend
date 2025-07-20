@@ -3,7 +3,7 @@ import Text from "../../Text/Text";
 import React from "react";
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   width?: string;
   fontSize?: "small" | "medium" | "large";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

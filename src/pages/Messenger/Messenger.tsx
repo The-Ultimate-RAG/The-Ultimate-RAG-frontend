@@ -32,7 +32,7 @@ function Messenger() {
             setMessages([]);
           }
         } catch (error) {
-          if (error.name !== "AbortError") {
+          if (error instanceof Error && error.name !== "AbortError") {
             console.error("Fetch error in Messenger:", error);
             setMessages([]);
           }

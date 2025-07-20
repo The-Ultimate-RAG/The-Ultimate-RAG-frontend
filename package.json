@@ -23,7 +23,8 @@
     "react-markdown": "^10.1.0",
     "react-pdf-viewer": "^0.1.0",
     "react-router-dom": "^7.6.3",
-    "rehype-raw": "^7.0.0"
+    "rehype-raw": "^7.0.0",
+    "rollup": "^4.45.1"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
