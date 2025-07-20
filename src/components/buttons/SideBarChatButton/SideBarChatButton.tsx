@@ -6,7 +6,7 @@ import Text from "../../Text/Text";
 interface ChatButtonProps {
   title: string;
   isActive: boolean;
-  chatId?: string;
+  chatId: string;
   className?: string;
 }
 
@@ -21,7 +21,7 @@ function SideBarChatButton(props: Readonly<ChatButtonProps>) {
     <button
       className={`${styles.chatButton} ${props.isActive ? styles.active : styles.inactive} ${props.className}`}
       onClick={handleClick}
-      disabled={!props.isActive}
+      disabled={props.isActive}
     >
       <Text colorVariant={props.isActive ? "button" : "primary"}>
         {props.title}
