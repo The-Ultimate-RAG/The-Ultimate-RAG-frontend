@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./SideBarChatButton.module.css";
 import Text from "../../Text/Text";
 

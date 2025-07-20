@@ -1,4 +1,3 @@
-// Sidebar.tsx
 import SideBarChatButton from "../buttons/SideBarChatButton/SideBarChatButton";
 import React, { useCallback, useEffect, useState } from "react";
 import Button from "../buttons/MainButton/Button";
@@ -89,7 +88,6 @@ function Sidebar(props: Readonly<SidebarProps>) {
             width="100%"
             borderRadius="round"
             onClick={handleAddChat}
-            isDisabled={isAddChatBlocked}
           >
             + Add chat
           </Button>

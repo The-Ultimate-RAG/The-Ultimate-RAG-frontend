@@ -1,15 +1,21 @@
 import Text from "../Text/Text";
 import styles from "./Message.module.css";
-import React, { useState, useEffect, useRef } from "react"; // Import useState and useEffect
+import React, { useState, useEffect } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import UploadedFileCard from "../UploadedFileCard/UploadedFileCard";
 
 interface MessageProps {
-  key: number;
+  key: string;
   textContent: string;
   sender: "user" | "system";
-  openFileViewer?: (fileUrl: string, fileName: string, page: number, lines: string, start: string) => void;
+  openFileViewer?: (
+    fileUrl: string,
+    fileName: string,
+    page: number,
+    lines: string,
+    start: string,
+  ) => void;
   isStreaming?: boolean;
   files?: { name: string; type: string; size: number }[];
 }
@@ -20,14 +26,24 @@ function transformCitationsToLinks(text: string): string {
   const citationRegex =
     /\s*\[Source:\s*([^,]+?)\s*,\s*Page:\s*(\d+)\s*,\s*Lines:\s*(\d+\s*-\s*\d+)\s*,\s*Start:?\s*(\d+)\]/g;
   return text.replace(citationRegex, (match, path, page, lines, start) => {
-    const fileUrl = `http:\\\\127.0.0.1:5050\\viewer\\${path}`;
-    console.log("File URL:", fileUrl, "Page:", page, "Lines:", lines, "Start:", start);
+    // const fileUrl = `https://the-ultimate-rag-hf-rag-integration-test.hf.space`+`\\viewer\\${path}`;
+    const fileUrl = `https://PopovDanil-backend.hf.space`+`\\viewer\\${path}`;
+    console.log(
+      "File URL:",
+      fileUrl,
+      "Page:",
+      page,
+      "Lines:",
+      lines,
+      "Start:",
+      start,
+    );
     return ` <a id="${fileUrl}&${page}&${lines}&${start}" href="${fileUrl}" data-page="${page}" data-lines="${lines}" data-start="${start}">[Source]</a>`;
   });
 }
 
 function Message(props: Readonly<MessageProps>) {
-  const { textContent, sender, openFileViewer, files, isStreaming } = props;
+  const { textContent, sender, openFileViewer, files } = props;
   const messageBubbleStyle: string = `${styles.messageBox} ${sender === "user" ? styles.userMessageBox : styles.systemMessageBox}`;
   const messageContainerStyle: string = `${styles.messageContainer} ${sender === "user" ? styles.userMessageContainer : styles.systemMessageContainer}`;
 
@@ -59,11 +75,12 @@ function Message(props: Readonly<MessageProps>) {
       const lines = target.getAttribute("data-lines");
       const start = target.getAttribute("data-start");
       console.log("File URL:", fileUrl, "Page:", page);
-      if (fileUrl) {
-        if (openFileViewer) {
-          openFileViewer(fileUrl, fileName, parseInt(page), lines, start);
-        }
+
+      if (openFileViewer) {
+        openFileViewer(fileUrl ? fileUrl : '', fileName, parseInt(page ? page : "1"), lines ? lines : '1-1', start ? start : '');
+        console.log('Opening file preview:', fileUrl)
       }
+
     }
   };
 

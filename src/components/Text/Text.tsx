@@ -32,7 +32,7 @@ interface TextProps {
   textTransform?: TextTransform;
   display?: DisplayType;
   className?: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   style?: React.CSSProperties;
 }
 
