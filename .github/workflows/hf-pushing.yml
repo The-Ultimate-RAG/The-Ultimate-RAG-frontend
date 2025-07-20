@@ -34,5 +34,5 @@ jobs:
           git checkout -b hf2-single-commit
           git add .
           git commit -m "Single commit for HF2" || true
-          git remote add hf2 https://huggingface.co/spaces/The-Ultimate-RAG-HF/frontend
+          git remote add hf2 https://Andrchest:${HF_TOKEN}@huggingface.co/spaces/The-Ultimate-RAG-HF/frontend
           git push --force hf2 hf2-single-commit:main
