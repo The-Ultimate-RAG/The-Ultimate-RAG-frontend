@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/_api": {
-        target: import.meta.env.VITE_API_URL, // Fallback if env variable is not set
+        target: import.meta.env.VITE_API_URL, // Fallback if env variable is not  set
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/_api/, ""),
       },
