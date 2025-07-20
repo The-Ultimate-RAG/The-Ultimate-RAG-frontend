@@ -4,6 +4,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0', // Allow external access
+    port: 5173, // Default port, adjust if needed
     proxy: {
       "/_api": {
         target: "https://PopovDanil-backend.hf.space", // Fallback if env variable is not  set
