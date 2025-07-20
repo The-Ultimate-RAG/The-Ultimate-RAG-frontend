@@ -1,0 +1,18 @@
+.icon {
+    color: var(--text-color-secondary);
+    transition: color var(--transition-speed-default) var(--bezier-custom),
+    transform var(--transition-speed-default) var(--bezier-custom);
+    height: 74.375%;
+    width: 74.375%;
+}
+
+.icon:hover {
+    color: var(--text-color-hover);
+    transform: translateY(-1px);
+    cursor: pointer;
+}
+
+.icon:active {
+    color: var(--text-color-primary);
+    transform: translateY(0px);
+}

@@ -1,0 +1,48 @@
+@import "../../../_variables.css";
+
+.backgroundContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-default);
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: var(--background-input-default);
+    border: none;
+    color: var(--text-color-primary);
+    transition: background-color var(--transition-speed-slow) var(--bezier-custom);
+}
+
+.input::placeholder {
+    color: var(--text-color-secondary)
+}
+
+.input:focus {
+    background-color: var(--background-color-primary);
+}
+
+.iconContainer {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.hiddenFileInput {
+    display: none;
+}
+

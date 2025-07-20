@@ -1,0 +1,90 @@
+@import '../_variables.css';
+
+.text {
+    font-family: Inter, sans-serif;
+    display: inline-block;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.fontSizeSmall {
+    font-size: var(--font-size-small);
+}
+
+.fontSizeMedium {
+    font-size: var(--font-size-medium);
+}
+
+.fontSizeLarge {
+    font-size: var(--font-size-large);
+}
+
+.fontSizeHuge {
+    font-size: var(--font-size-huge);
+}
+
+.fontSizeHugest {
+    font-size: 72px;
+}
+
+.colorPrimary {
+    color: var(--text-color-primary)
+}
+
+.colorSecondary {
+    color: var(--text-color-secondary)
+}
+
+.colorButton {
+    color: var(--text-color-button)
+}
+
+.colorHover {
+    color: var(--text-color-hover)
+}
+
+.text a {
+    color: var(--color-primary);
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease-in-out, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.text a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    bottom: -1px;
+    background-color: var(--color-primary);
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s cubic-bezier(.03, .38, .64, .91), color 0.3s ease-in-out, text-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.text a:hover {
+    color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    text-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.text a:hover::after {
+    transform: scaleX(1);
+    color: var(--color-primary-hover);
+}
+
+.text a:not(:hover)::after {
+    transform-origin: right;
+}
+
+.text a:active {
+    color: var(--color-primary-active);
+    transform: translateY(0px) scale(0.98);
+}
+
+.text a:active::after {
+    color: var(--color-primary-active);
+}

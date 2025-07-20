@@ -1,0 +1,9 @@
+@import "./components/_variables.css";
+
+body {
+    background: var(--background-surface-secondary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

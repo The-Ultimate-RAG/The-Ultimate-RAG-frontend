@@ -1,0 +1,38 @@
+name: Sync to Hugging Face Hub
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "Andrchest"
+          git config --global user.email "andreipolevoi220@gmail.com"
+
+      - name: Set up Git LFS
+        run: |
+          git lfs install
+          git lfs track "*.jpeg" "*.jpg" "*.png" "*.gif" "*.pdf" "*.zip" "*.bin"
+          git add .gitattributes
+          git add .
+          git commit -m "Add LFS tracking for binary files" || true
+
+      - name: Push to Hugging Face Hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git checkout -b hf2-single-commit
+          git reset --soft $(git rev-list --max-parents=0 HEAD)
+          git commit -m "Single commit for HF2"
+          git remote add hf2 https://Andrchest:$HF_TOKEN@huggingface.co/spaces/The-Ultimate-RAG-HF/frontend
+          git push --force hf2 hf2-single-commit:main

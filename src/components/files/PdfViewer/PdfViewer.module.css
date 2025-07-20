@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    width: 30vw;
+    height: 50em;
+}
+
+.highlightArea {
+    background-color: rgba(255, 255, 0, 0.4);
+    position: absolute;
+    pointer-events: none;
+    border-radius: 2px;
+}
+

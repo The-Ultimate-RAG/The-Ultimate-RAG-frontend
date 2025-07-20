@@ -1,0 +1,105 @@
+:root {
+    --input-padding: 16px 24px;
+    --input-placeholder-color: #999999;
+    --input-focused-shadow: 0 0 0 3px rgba(20, 184, 166, 0.3), 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    --bezier-custom: cubic-bezier(0.25, 0.8, 0.25, 1);
+    --active-button-box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.4), 0 8px 20px rgba(0, 0, 0, 0.15);
+
+    /* Spacings */
+    --spacing-zero: 0px;
+    --spacing-xxs: 4px;
+    --spacing-xs: 8px;
+    --spacing-sm: 10px;
+    --spacing-md: 12px;
+    --spacing-lg: 14px;
+    --spacing-xl: 16px;
+    --spacing-xxl: 24px;
+    --spacing-xxxl: 30px;
+    --spacing-huge: 32px;
+    --margin-neg-sm: -27px;
+
+    /* Sizes */
+    --icon-size-default: 20px;
+    --checkmark-dasharray: 30;
+
+    /* Border radius */
+    --broder-radius-xs: 3px;
+    --border-radius-sm: 10px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+
+    /* Transitions */
+    --transition-speed-fast: 0.15s;
+    --transition-speed-medium: 0.2s;
+    --transition-speed-default: 0.3s;
+    --transition-speed-slow: 0.4s;
+    --transition-speed-x-slow: 0.5s;
+    --transition-timing-ease-in-out: ease-in-out;
+    --transition-timing-ease-out: ease-out;
+    --transition-timing-custom-1: cubic-bezier(0.03, 0.38, 0.64, 0.91);
+
+    /* Fonts */
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 20px;
+    --font-size-huge: 32px;
+
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-scale-sm: 0.9;
+}
+
+.light {
+    /* Accent colors */
+    --color-primary: #14B8A6;
+    --color-primary-hover: #10A090;
+    --color-primary-active: #0C887A;
+
+    /* Text colors */
+    --text-color-primary: #1F2937;
+    --text-color-secondary: #6B7280;
+    --text-color-hover: #454D5B;
+    --text-color-button: #FFFFFF;
+
+    /* Background colors */
+    --background-color-primary: #FFFFFF;
+    --sidebar-background-color: #FFFFFF;
+    --background-surface-secondary: #F8F6F1;
+    --background-input-default: #E0E0E0;
+    --input-focused-background-color: var(--background-color-primary);
+
+    /* Shadows */
+    --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.07);
+    --border-color-default: #6B7280;
+
+    /* Chat button */
+    --color-chat-button-hover: #dce1e1 /* Something */
+}
+
+.dark {
+    /* Accent colors */
+    --color-primary: #34D399;
+    --color-primary-hover: #6EE7B7;
+    --color-primary-active: #34D399;
+
+    /* Text colors */
+    --text-color-primary: #E5E7EB;
+    --text-color-hover: #F9FAFB;
+    --text-color-secondary: #A9B0BF;
+    --text-color-button: #111827;
+
+    /* Background colors */
+    --background-color-primary: #44444C;
+    --sidebar-background-color: #1F2937;
+    --background-surface-secondary: #111827;
+    --input-focused-background-color: var(--background-color-primary);
+    --background-input-default: #242428;
+
+    --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --border-color-default: #A9B0BF;
+    --border-color-chat: #30363D;
+
+    /* Chat button */
+    --color-chat-button-hover: #5A5A63 /* Something */
+}

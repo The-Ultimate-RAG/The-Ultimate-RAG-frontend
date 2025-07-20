@@ -1,0 +1,137 @@
+/* Sidebar.module.css */
+@import "../_variables.css";
+
+.sidebarContainer {
+    width: 100%;
+    min-width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--sidebar-background-color);
+}
+
+.sidebarContainer .buttonContainer {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding: 20px 10px;
+}
+
+.sidebarContainer .buttonContainer .addChatButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.sidebarContainer .buttonContainer .searchButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sidebarContainer .chatsContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.chatsContainer::-webkit-scrollbar-track {
+    display: none;
+    width: 0;
+}
+
+.chatsContainer::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    background: transparent;
+}
+
+.sidebarContainer .themeSwitcher {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hide-neighbor {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.noChatsPlaceholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color-secondary);
+    height: 100%;
+}
+
+.noChatsIcon {
+    font-size: 48px;
+    margin-bottom: 0;
+    color: var(--text-color-secondary);
+}
+
+.noChatsTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--text-color-secondary);
+}
+
+.noChatsDescriptionLine {
+    font-size: 14px;
+    line-height: 1.2;
+    color: #797B7E;
+    margin: 0;
+    padding: 0;
+}
+
+.horizontalLine {
+    margin-top: var(--spacing-huge);
+    width: 100%;
+    border: none;
+    display: flex;
+    background-color: var(--color-chat-button-hover);
+    height: 1px;
+}
+
+.noRecentConversations {
+    margin-top: var(--spacing-xs);
+    width: 100%;
+    transition: none;
+    background-color: transparent;
+}
+
+.noRecentConversations:hover {
+    cursor: default;
+    background-color: transparent;
+    transform: translateY(0px);
+}
+
+.noRecentConversations:active {
+    cursor: default;
+    background-color: transparent;
+}
+
+.noRecentConversations p {
+    color: var(--text-color-secondary);
+}
+
