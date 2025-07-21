@@ -1,7 +1,7 @@
 import SideBarChatButton from "../buttons/SideBarChatButton/SideBarChatButton";
 import React, { useCallback, useEffect, useState } from "react";
 import Button from "../buttons/MainButton/Button";
-import styles from "./SideBar.module.css";
+import styles from "./Sidebar.module.css";
 import SearchButton from "../buttons/SearchButton/SearchButton";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import { useNavigate } from "react-router-dom";
