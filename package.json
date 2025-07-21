@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": ".",
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=\"--trace-deprecation\" vite",
     "build": "tsc && vite build",
